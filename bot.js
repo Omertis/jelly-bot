@@ -2634,10 +2634,9 @@ client.on('message', message => {
 const arraySort = require('array-sort'),
       table = require('table');
 
-
 client.on('message' , async (message) => {
 
-    if(message.content.startsWith(prefix + "دعوات")) {
+    if(message.content.startsWith(prefix + "top")) {
 
   let invites = await message.guild.fetchInvites();
 
@@ -2651,13 +2650,12 @@ client.on('message' , async (message) => {
     })
     const embed = new Discord.RichEmbed()
     .setColor(0x7289da)
-    .setTitle("دعوات السيرفر")
-    .addField(' المتصدرين' , `\`\`\`${table.table(possibleInvites)}\`\`\``)
+    .setTitle("Invites")
+    .addField(' Top !' , `\`\`\`${table.table(possibleInvites)}\`\`\``)
 
     message.channel.send(embed)
     }
 });
-
 
 
 
