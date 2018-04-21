@@ -23,7 +23,7 @@ client.on('ready', () => {
 });
 
 client.on("message", message => {
-    if (message.content === "#help") {
+    if (message.content.startsWith(prefix + "#help")) {
      const embed = new Discord.RichEmbed() 
          .setColor("#6fc167")
          .setThumbnail(message.author.avatarURL)
