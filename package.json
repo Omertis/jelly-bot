@@ -25,7 +25,7 @@
     "table": "^4.0.3",
     "youtube-info": "^1.2.0",
     "ytdl-core": "^0.20.2"
-     "goo.gl":"^1.4.8",
+     "goo.gl": "^1.4.8",
   },
   "engines": {
     "node": "8.x"
