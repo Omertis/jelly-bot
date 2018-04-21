@@ -1,1 +1,1 @@
-worker: node jelly.js
+worker: node bot.js
