@@ -2027,7 +2027,7 @@ x5bzteam.connect();
 
 client.on('ready', function(){
     var ms = 60000 ;
-    var setGame = [`#help|bot in ${client.guilds.size}servers`,` https://discord.gg/MEzxQ8n`];
+    var setGame = [`=help|bot in ${client.guilds.size}servers`,` https://discord.gg/MEzxQ8n`];
     var i = -1;
     var j = 0;
     setInterval(function (){
