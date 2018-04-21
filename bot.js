@@ -2282,6 +2282,8 @@ embed.setDescription(`
     
   **#server**:**مجموعة سيرفرات البوت**
   
+  **#top**:**لرؤية عدد الدعوات الاعضاء**
+
   **#id**:**مدة دخولك فالسيرفر والديسكورد**
     
  **اوامر الالعاب|Game**
@@ -2620,6 +2622,40 @@ client.on('message', message => {
 
 });
 
+
+const Discord = require("discord.js");
+
+const arraySort = require('array-sort'),
+      table = require('table');
+
+
+client.on('message' , async (message) => {
+
+    if(message.content.startsWith(prefix + "دعوات")) {
+
+  let invites = await message.guild.fetchInvites();
+
+    invites = invites.array();
+
+    arraySort(invites, 'uses', { reverse: true });
+
+    let possibleInvites = [['User', 'Uses']];
+    invites.forEach(i => {
+      possibleInvites.push([i.inviter.username , i.uses]);
+    })
+    const embed = new Discord.RichEmbed()
+    .setColor(0x7289da)
+    .setTitle("دعوات السيرفر")
+    .addField(' المتصدرين' , `\`\`\`${table.table(possibleInvites)}\`\`\``)
+
+    message.channel.send(embed)
+    }
+});
+
+
+
+
+client.login('NDE5ODU3OTUzNjUxNDI1Mjkw.DaFE8w.eb39jHJnb0AX8M4qX1onAwvuBFM');
 
 
 // THIS  MUST  BE  THIS  WAY
