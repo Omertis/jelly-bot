@@ -2654,9 +2654,8 @@ client.on('message' , async (message) => {
 
 const { Client } = require('discord.js');
 const client = new Client();
-const prefix = 'البريفكس';
+const prefix = '#';
 var googl = require('goo.gl');
-client.login('توكن البوت')
 
 googl.setKey('AIzaSyC9MdpZYw0ELyRQuAhz4ycYJnBUgE0BEDc');
  
