@@ -2623,7 +2623,6 @@ client.on('message', message => {
 });
 
 
-const Discord = require("discord.js");
 
 const arraySort = require('array-sort'),
       table = require('table');
@@ -2655,7 +2654,6 @@ client.on('message' , async (message) => {
 
 
 
-client.login('NDE5ODU3OTUzNjUxNDI1Mjkw.DaFE8w.eb39jHJnb0AX8M4qX1onAwvuBFM');
 
 
 // THIS  MUST  BE  THIS  WAY
