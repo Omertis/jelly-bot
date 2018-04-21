@@ -23,7 +23,7 @@ client.on('ready', () => {
 });
 
 client.on("message", message => {
-    if (message.content === "123213e") {
+    if (message.content === "#help") {
      const embed = new Discord.RichEmbed() 
          .setColor("#6fc167")
          .setThumbnail(message.author.avatarURL)
@@ -62,9 +62,10 @@ client.on("message", message => {
  **#clear**:**مسح الشات بالعدد**
  
  
-  **#clearall**:**مسح خمسين رسالة**
+ **#clearall**:**مسح خمسين رسالة**
 
- 
+ **#vc**:**لطرد الشخص من الروم الصوتي**
+
  **#role**:**اعطاء شخص رتبة**
  
  **#roles**:**اظهار الرتب فالسيرفر**
@@ -93,6 +94,8 @@ client.on("message", message => {
     
   **#server**:**مجموعة سيرفرات البوت**
   
+  **#top**:**لرؤية عدد الدعوات الاعضاء**
+
   **#id**:**مدة دخولك فالسيرفر والديسكورد**
     
  **اوامر الالعاب|Game**
@@ -106,7 +109,11 @@ client.on("message", message => {
  **#خواطر**
 
  **#حب**
- 
+  
+ **#عواصم**
+
+ **#سرعة**
+
  **اوامر الميوزك|Music Commands**
  
  **#join**:**ليدخل البوت الروم**
@@ -2219,7 +2226,7 @@ client.on('guildMemberAdd', member => {
 
 
 client.on('message', message => {
-if (message.content.startsWith(prefix + 'help')) {
+if (message.content.startsWith(prefix + 'hfdssdfelp')) {
     let pages = ['Page1','page2','page3']
     let page = 1;
 
