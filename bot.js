@@ -23,8 +23,7 @@ client.on('ready', () => {
 });
 
 client.on("message", message => {
-       var prefix = "=";
-    if (message.content.startsWith(prefix + "help")) {
+   if (message.content.startsWith(prefix + "help")) {
      const embed = new Discord.RichEmbed() 
          .setColor("#6fc167")
          .setThumbnail(message.author.avatarURL)
@@ -170,6 +169,7 @@ client.on('message', message => {
 
 
 //-------------------------------------في رساله في الخااص !!
+var prefix = "="
 client.on('message', function (message) {
     if (message.channel.type === "dm") {
         if (message.author.id === client.user.id) return;
@@ -187,6 +187,7 @@ client.on('message', function (message) {
 //-------------------------------------في رساله ب الخااص !!
 
 //-------------------------------------برودكستات السيرفر فقط
+var prefix = "="
 client.on('message', message => {
     if (message.author.id === client.user.id) return;
     if (message.guild) {
@@ -234,7 +235,6 @@ client.on('message', message => {
 //-------------------------------------الكيك
 
 client.on('message', message => {
-        var prefix = "=";
     if (message.author.Jelly) return;
     if (!message.content.startsWith(prefix)) return;
 
@@ -280,6 +280,7 @@ client.on('message', message => {
 //-------------------------------------الكيك
 
 //-------------------------------------الباند
+var prefix = "="
 client.on('message', message => {
     if (message.author.x5bz) return;
     if (!message.content.startsWith(prefix)) return;
@@ -332,6 +333,7 @@ client.on('message', message => {
 
 //-------------------------------------الساي
 
+var prefix = "=";
 client.on('message', message => {
     if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
@@ -355,6 +357,7 @@ client.on('message', message => {
 //-------------------------------------ح��له الاعضاع
 
 client.on('message', message => {
+    var prefix = "=";
     if (message.content.startsWith(prefix +'mb')) {
     const embed = new Discord.RichEmbed()
     .setDescription(`**Members info🔋
@@ -376,6 +379,7 @@ client.on('message', message => {
 //-------------------------------------معلومات السيرفر
 
 client.on('message', message => {
+  var prefix = "=";
     if (message.content.startsWith(prefix +"server")) {
         if (!message.channel.guild) return;
         const millis = new Date().getTime() - message.guild.createdAt.getTime();
@@ -411,6 +415,7 @@ client.on('message', message => {
 //-------------------------------------ايدي
 
 client.on("message", msg => {
+    var prefix = "=";
     if (msg.content.startsWith(prefix + "ايدي")) {
         if (!msg.channel.guild) return msg.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');
         const embed = new Discord.RichEmbed();
@@ -433,6 +438,7 @@ client.on("message", msg => {
 
 //-------------------------------------مسح الشات
 client.on("message", message => {
+    var prefix = "=";
             var args = message.content.substring(prefix.length).split(" ");
             if (message.content.startsWith(prefix + "clearall")) {
    if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('  ');
@@ -488,6 +494,7 @@ client.on('message', message => {
 //-------------------------------------صوره السيرفر
 
 client.on("message", message => {
+    const prefix = "="
 
     if (!message.channel.guild) return;
     if (message.author.bot) return;
@@ -546,6 +553,7 @@ function timeCon(time) {
 
 //-------------------------------------ايمبيد
 
+var prefix = "=";
 
 client.on('message', message => {
     if (message.author.bot) return;
@@ -734,6 +742,7 @@ client.on('guildDelete', guild => {
 //-------------------------------------تغير بدون اطفاء
 
 client.on('message', message => {
+    var prefix = "=";
 
     if (!message.content.startsWith(prefix)) return;
     var args = message.content.split(' ').slice(1);
@@ -943,6 +952,7 @@ channel.sendEmbed(embed)
 
    client.on('message', message => {   
 if (message.author.boss) return;
+var prefix = "=";
 if (!message.content.startsWith(prefix)) return;
 let command = message.content.split(" ")[0];
 command = command.slice(prefix.length);
@@ -1015,6 +1025,7 @@ client.on('guildMemberAdd', member=> {
     });
 
           client.on('message', function(message) {
+    var prefix = "#"
  
     if(message.content.startsWith(prefix + 'تفعيل')) {
         let guild = message.mentions.members.first();
@@ -1121,7 +1132,7 @@ client.on('ready', () => {
   
 client.on('message', message => {
    
-    if (message.content.startsWith(prefix +"#رابط")) {
+    if (message.content.startsWith(prefix +"رابط")) {
         
   message.channel.createInvite({
         thing: true,
@@ -1177,6 +1188,7 @@ client.on('ready', () => {
 
 
 client.on('message', message => {
+    var prefix = "="
 if (message.content.startsWith(prefix + "uptime")) {
    let uptime = client.uptime;
 
@@ -1353,6 +1365,7 @@ if (message.content.startsWith("#addrole")) {
 });
 
 client.on('message', message => { 
+    var prefix = "=";
     if (message.author.boss) return;
     if (!message.content.startsWith(prefix)) return;
     let command = message.content.split(" ")[0];
@@ -2008,7 +2021,7 @@ x5bzteam.connect();
 
 client.on('ready', function(){
     var ms = 60000 ;
-    var setGame = [`=help|bot in ${client.guilds.size}servers`,` https://discord.gg/MEzxQ8n`];
+    var setGame = [`#help|bot in ${client.guilds.size}servers`,` https://discord.gg/MEzxQ8n`];
     var i = -1;
     var j = 0;
     setInterval(function (){
@@ -2041,10 +2054,33 @@ if( verifed.some(word => message.author.id.includes(word)) ) {    return message
 
 
 
-
+client.on("message", msg => {
+    var prefix = "<>";
+    if(msg.content.startsWith (prefix + "id")) {
+      var mentionned = msg.mentions.users.first();
+      var official;
+        if(mentionned){
+            var official = mentionned;} 
+            else 
+        {var official = msg.author;}
+        var roles = client.guilds.get(message.guild.id).roles.map(r => r.name);
+    if(!msg.channel.guild) return msg.reply("**:x: اسف لكن هذا الامر للسيرفرات فقط **");     
+    const embed = new Discord.RichEmbed();
+    embed.addField(":cloud_tornado:  الاسم", `**[ ${official.username}#${official.discriminator} ]**`, true)
+    .addField(":id:  الايدي", `**[ ${official.id} ]**`, true)
+    .setColor("RANDOM")
+    .setFooter(official.username , official.avatarURL)
+    .setThumbnail(`${official.avatarURL}`).setTimestamp()
+    .setURL(`${official.avatarURL}`)
+    .addField(":spy:  الحالة", `**[ ${official.presence.status.toUpperCase()} ]**`, true)
+    .addField(":satellite_orbital:   يلعب", `**[ ${official.presence.game === null ? "No Game" : official.presence.game.name} ]**`, true)
+    .addField(":military_medal:  الرتب", `**[ ${message.guild.roles.size} ]**`, true)
+    .addField(":robot:  هل هو بوت", `**[ ${official.bot.toString().toUpperCase()} ]**`, true);
+    msg.channel.send({embed: embed})}});
+  prefix +
 client .on("message", message => {
     let args = message.content.split(" ").slice(1);
-  if (message.content.startsWith(prefix +'d')) {
+  if (message.content.startsWith(prefix +'u')) {
         let user = message.mentions.users.first();
         let reason = args.slice(1).join(' ');
         let modlog = client.channels.find('name', 'report');
@@ -2184,7 +2220,7 @@ client.on('guildMemberAdd', member => {
 
 
 client.on('message', message => {
-if (message.content.startsWith(prefix + 'hfdssdfelp')) {
+if (message.content.startsWith(prefix + 'hecsdaclp')) {
     let pages = ['Page1','page2','page3']
     let page = 1;
 
@@ -2247,8 +2283,6 @@ embed.setDescription(`
     
   **#server**:**مجموعة سيرفرات البوت**
   
-  **#top**:**لرؤية عدد الدعوات الاعضاء**
-
   **#id**:**مدة دخولك فالسيرفر والديسكورد**
     
  **اوامر الالعاب|Game**
@@ -2425,7 +2459,7 @@ Server MemberCount : **${gmemb} **
 
  client.on('message', message => {
               if(!message.channel.guild) return;
-     if (message.content.startsWith('#bc')) {
+    if(message.content.startsWith(prefix + '#bc')) {
     if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
   if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
     let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
@@ -2494,6 +2528,7 @@ client.on('message',function( m ){
 
 
 client.on("message", message => {
+    var prefix = "=";
     const command = message.content.split(" ")[0];
 
     if(command == prefix+"vc"){
@@ -2523,6 +2558,7 @@ client.on("message", message => {
      });
     }
 });
+
 
 
 
