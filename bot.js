@@ -41,71 +41,71 @@ client.on("message", message => {
 ╱╱╱╱╱╱╱╱╱╱╰━━╯╱╱╱╱╱╱╱╱╱╱
 **اوامر الادارة|Administrator**
 
- **=kick**:**طرد العضو**
+ **#kick**:**طرد العضو**
  
- **=ban**:**حظر العضو**
+ **#ban**:**حظر العضو**
 
- **=mute**:**اعطاء ميوت للعضو**
+ **#mute**:**اعطاء ميوت للعضو**
 
- **=d**:**لتبليغ عن العضو**
+ **#d**:**لتبليغ عن العضو**
 
- **=unmute**:**فك الميوت عن العضو**
+ **#unmute**:**فك الميوت عن العضو**
 
- **=bc**:**ارسال رسالة للاعضاء فالخاص**
+ **#bc**:**ارسال رسالة للاعضاء فالخاص**
 
- **=clear**:**مسح الشات بالعدد**
+ **#clear**:**مسح الشات بالعدد**
  
- **=clearall**:**مسح خمسين رسالة**
+ **#clearall**:**مسح خمسين رسالة**
 
- **=vc**:**لطرد الشخص من الروم الصوتي**
+ **#vc**:**لطرد الشخص من الروم الصوتي**
 
- **=role**:**اعطاء شخص رتبة**
+ **#role**:**اعطاء شخص رتبة**
  
- **=roles**:**اظهار الرتب فالسيرفر**
+ **#roles**:**اظهار الرتب فالسيرفر**
  
-**=رابط**                  
+**#رابط**                  
 
  **لشات اللوق اكتب اسم الشات **:**log**
  
  **اوامر العامة|Normal**
 
-  **=bot**:**معلومات بسيطة عن البوت**
+  **#bot**:**معلومات بسيطة عن البوت**
  
-  **=mb**:**حالة اعضاء السيرفر**
+  **#mb**:**حالة اعضاء السيرفر**
  
-  **=server**:**معلومات عن السيرفر**
+  **#server**:**معلومات عن السيرفر**
  
-  **=time**:**لمعرفة الوقت**
+  **#time**:**لمعرفة الوقت**
  
-  **=avatar**:**تعرض صورتك الشخصية**
+  **#avatar**:**تعرض صورتك الشخصية**
   
-  **=aserver**:**تعرض صورة السيرفر**
+  **#aserver**:**تعرض صورة السيرفر**
     
-  **=ping**:**تشوف كم سرعة استجابة البوت**
+  **#ping**:**تشوف كم سرعة استجابة البوت**
       
-  **=info**:**معلومات كافية عن البوت**
+  **#info**:**معلومات كافية عن البوت**
     
-  **=server**:**مجموعة سيرفرات البوت**
+  **#server**:**مجموعة سيرفرات البوت**
   
-  **=top**:**لرؤية عدد الدعوات الاعضاء**
+  **#top**:**لرؤية عدد الدعوات الاعضاء**
 
-  **=id**:**مدة دخولك فالسيرفر والديسكورد**
+  **#id**:**مدة دخولك فالسيرفر والديسكورد**
     
  **اوامر الالعاب|Game**
       
- **=صراحة**
+ **#صراحة**
 
- **=عقاب**
+ **#عقاب**
 
- **=كت تويت**
+ **#كت تويت**
 
- **=خواطر**
+ **#خواطر**
 
- **=حب**
+ **#حب**
   
- **=عواصم**
+ **#عواصم**
 
- **=سرعة**
+ **#سرعة**
 
  **اوامر الميوزك|Music Commands**
  
@@ -168,7 +168,7 @@ client.on('message', message => {
 
 
 //-------------------------------------في رساله في الخااص !!
-var prefix = "="
+var prefix = "#"
 client.on('message', function (message) {
     if (message.channel.type === "dm") {
         if (message.author.id === client.user.id) return;
@@ -356,7 +356,7 @@ client.on('message', message => {
 //-------------------------------------ح��له الاعضاع
 
 client.on('message', message => {
-    var prefix = "=";
+    var prefix = "#";
     if (message.content.startsWith(prefix +'mb')) {
     const embed = new Discord.RichEmbed()
     .setDescription(`**Members info🔋
@@ -741,7 +741,7 @@ client.on('guildDelete', guild => {
 //-------------------------------------تغير بدون اطفاء
 
 client.on('message', message => {
-    var prefix = "=";
+    var prefix = "#";
 
     if (!message.content.startsWith(prefix)) return;
     var args = message.content.split(' ').slice(1);
@@ -951,7 +951,7 @@ channel.sendEmbed(embed)
 
    client.on('message', message => {   
 if (message.author.boss) return;
-var prefix = "=";
+var prefix = "#";
 if (!message.content.startsWith(prefix)) return;
 let command = message.content.split(" ")[0];
 command = command.slice(prefix.length);
@@ -1187,7 +1187,7 @@ client.on('ready', () => {
 
 
 client.on('message', message => {
-    var prefix = "="
+    var prefix = "#"
 if (message.content.startsWith(prefix + "uptime")) {
    let uptime = client.uptime;
 
@@ -1364,7 +1364,7 @@ if (message.content.startsWith("#addrole")) {
 });
 
 client.on('message', message => { 
-    var prefix = "=";
+    var prefix = "#";
     if (message.author.boss) return;
     if (!message.content.startsWith(prefix)) return;
     let command = message.content.split(" ")[0];
@@ -1534,7 +1534,7 @@ const Za7f = [
 
 
 client.on('message', message => {
-if (message.content.startsWith("=عقاب")) {
+if (message.content.startsWith("#عقاب")) {
              if(!message.channel.guild) return message.reply('** This command only for servers**');
 var embed = new Discord.RichEmbed()
 .setColor('#6fc167')
@@ -1578,7 +1578,7 @@ const cuttweet = [
 ]
 
 client.on('message', message => {
-if (message.content.startsWith("=كت تويت")) {
+if (message.content.startsWith("#كت تويت")) {
              if(!message.channel.guild) return message.reply('** This command only for servers**');
 var embed = new Discord.RichEmbed()
 .setColor('#6fc167')
@@ -2458,7 +2458,7 @@ Server MemberCount : **${gmemb} **
 
  client.on('message', message => {
               if(!message.channel.guild) return;
-    if(message.content.startsWith(prefix + '#bc')) {
+    if(message.content.startsWith(prefix + '-bc')) {
     if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
   if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**للأسف لا تمتلك صلاحية** `ADMINISTRATOR`' );
     let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
@@ -2527,7 +2527,7 @@ client.on('message',function( m ){
 
 
 client.on("message", message => {
-    var prefix = "=";
+    var prefix = "#";
     const command = message.content.split(" ")[0];
 
     if(command == prefix+"vc"){
