@@ -42,7 +42,6 @@ client.on("message", message => {
 **اوامر الادارة|Administrator**
 
  **=kick**:**طرد العضو**
- **=short**:**اختصر الروابط**
  
  **=ban**:**حظر العضو**
 
