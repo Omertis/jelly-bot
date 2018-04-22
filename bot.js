@@ -23,7 +23,7 @@ client.on('ready', () => {
 });
 
 client.on("message", message => {
-   if (message.content.startsWith(prefix + "help")) {
+   if (message.content.startsWith("=help")) {
      const embed = new Discord.RichEmbed() 
          .setColor("#6fc167")
          .setThumbnail(message.author.avatarURL)
@@ -147,7 +147,7 @@ message.react('📩')
 
 //-------------------------------------بوت
 client.on('message', message => {
-    var prefix = "#";
+    var prefix = "=";
     if (message.content.startsWith(prefix + "bot")) {
         const embed = new Discord.RichEmbed()
             .setColor("#6fc167")
@@ -165,7 +165,7 @@ client.on('message', message => {
 
 
 //-------------------------------------في رساله في الخااص !!
-var prefix = "#"
+var prefix = "="
 client.on('message', function (message) {
     if (message.channel.type === "dm") {
         if (message.author.id === client.user.id) return;
@@ -183,7 +183,7 @@ client.on('message', function (message) {
 //-------------------------------------في رساله ب الخااص !!
 
 //-------------------------------------برودكستات السيرفر فقط
-var prefix = "#"
+var prefix = "="
 client.on('message', message => {
     if (message.author.id === client.user.id) return;
     if (message.guild) {
@@ -276,7 +276,7 @@ client.on('message', message => {
 //-------------------------------------الكيك
 
 //-------------------------------------الباند
-var prefix = "#"
+var prefix = "="
 client.on('message', message => {
     if (message.author.x5bz) return;
     if (!message.content.startsWith(prefix)) return;
@@ -329,7 +329,7 @@ client.on('message', message => {
 
 //-------------------------------------الساي
 
-var prefix = "#";
+var prefix = "=";
 client.on('message', message => {
     if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
@@ -353,7 +353,7 @@ client.on('message', message => {
 //-------------------------------------ح��له الاعضاع
 
 client.on('message', message => {
-    var prefix = "#";
+    var prefix = "=";
     if (message.content.startsWith(prefix +'mb')) {
     const embed = new Discord.RichEmbed()
     .setDescription(`**Members info🔋
@@ -375,7 +375,7 @@ client.on('message', message => {
 //-------------------------------------معلومات السيرفر
 
 client.on('message', message => {
-  var prefix = "#";
+  var prefix = "=";
     if (message.content.startsWith(prefix +"server")) {
         if (!message.channel.guild) return;
         const millis = new Date().getTime() - message.guild.createdAt.getTime();
@@ -411,7 +411,7 @@ client.on('message', message => {
 //-------------------------------------ايدي
 
 client.on("message", msg => {
-    var prefix = "#";
+    var prefix = "=";
     if (msg.content.startsWith(prefix + "ايدي")) {
         if (!msg.channel.guild) return msg.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');
         const embed = new Discord.RichEmbed();
@@ -434,7 +434,7 @@ client.on("message", msg => {
 
 //-------------------------------------مسح الشات
 client.on("message", message => {
-    var prefix = "#";
+    var prefix = "=";
             var args = message.content.substring(prefix.length).split(" ");
             if (message.content.startsWith(prefix + "clearall")) {
    if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('  ');
@@ -490,7 +490,7 @@ client.on('message', message => {
 //-------------------------------------صوره السيرفر
 
 client.on("message", message => {
-    const prefix = "#"
+    const prefix = "="
 
     if (!message.channel.guild) return;
     if (message.author.bot) return;
@@ -549,7 +549,7 @@ function timeCon(time) {
 
 //-------------------------------------ايمبيد
 
-var prefix = "#";
+var prefix = "=";
 
 client.on('message', message => {
     if (message.author.bot) return;
@@ -738,7 +738,7 @@ client.on('guildDelete', guild => {
 //-------------------------------------تغير بدون اطفاء
 
 client.on('message', message => {
-    var prefix = "#";
+    var prefix = "=";
 
     if (!message.content.startsWith(prefix)) return;
     var args = message.content.split(' ').slice(1);
@@ -948,7 +948,7 @@ channel.sendEmbed(embed)
 
    client.on('message', message => {   
 if (message.author.boss) return;
-var prefix = "#";
+var prefix = "=";
 if (!message.content.startsWith(prefix)) return;
 let command = message.content.split(" ")[0];
 command = command.slice(prefix.length);
@@ -1021,7 +1021,7 @@ client.on('guildMemberAdd', member=> {
     });
 
           client.on('message', function(message) {
-    var prefix = "#"
+    var prefix = "="
  
     if(message.content.startsWith(prefix + 'تفعيل')) {
         let guild = message.mentions.members.first();
@@ -1184,7 +1184,7 @@ client.on('ready', () => {
 
 
 client.on('message', message => {
-    var prefix = "#"
+    var prefix = "="
 if (message.content.startsWith(prefix + "uptime")) {
    let uptime = client.uptime;
 
@@ -1361,7 +1361,7 @@ if (message.content.startsWith("#addrole")) {
 });
 
 client.on('message', message => { 
-    var prefix = "#";
+    var prefix = "=";
     if (message.author.boss) return;
     if (!message.content.startsWith(prefix)) return;
     let command = message.content.split(" ")[0];
@@ -1531,7 +1531,7 @@ const Za7f = [
 
 
 client.on('message', message => {
-if (message.content.startsWith("#عقاب")) {
+if (message.content.startsWith("=عقاب")) {
              if(!message.channel.guild) return message.reply('** This command only for servers**');
 var embed = new Discord.RichEmbed()
 .setColor('#6fc167')
@@ -1575,7 +1575,7 @@ const cuttweet = [
 ]
 
 client.on('message', message => {
-if (message.content.startsWith("#كت تويت")) {
+if (message.content.startsWith("=كت تويت")) {
              if(!message.channel.guild) return message.reply('** This command only for servers**');
 var embed = new Discord.RichEmbed()
 .setColor('#6fc167')
@@ -2017,7 +2017,7 @@ x5bzteam.connect();
 
 client.on('ready', function(){
     var ms = 60000 ;
-    var setGame = [`#help|bot in ${client.guilds.size}servers`,` https://discord.gg/MEzxQ8n`];
+    var setGame = [`=help|bot in ${client.guilds.size}servers`,` https://discord.gg/MEzxQ8n`];
     var i = -1;
     var j = 0;
     setInterval(function (){
@@ -2524,7 +2524,7 @@ client.on('message',function( m ){
 
 
 client.on("message", message => {
-    var prefix = "#";
+    var prefix = "=";
     const command = message.content.split(" ")[0];
 
     if(command == prefix+"vc"){
