@@ -23,6 +23,7 @@ client.on('ready', () => {
 });
 
 client.on("message", message => {
+       var prefix = "=";
     if (message.content.startsWith(prefix + "help")) {
      const embed = new Discord.RichEmbed() 
          .setColor("#6fc167")
@@ -233,6 +234,7 @@ client.on('message', message => {
 //-------------------------------------الكيك
 
 client.on('message', message => {
+        var prefix = "=";
     if (message.author.Jelly) return;
     if (!message.content.startsWith(prefix)) return;
 
