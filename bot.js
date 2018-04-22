@@ -150,7 +150,7 @@ message.react('📩')
 
 //-------------------------------------بوت
 client.on('message', message => {
-    var prefix = "=";
+    var prefix = "#";
     if (message.content.startsWith(prefix + "bot")) {
         const embed = new Discord.RichEmbed()
             .setColor("#6fc167")
@@ -186,7 +186,7 @@ client.on('message', function (message) {
 //-------------------------------------في رساله ب الخااص !!
 
 //-------------------------------------برودكستات السيرفر فقط
-var prefix = "="
+var prefix = "#"
 client.on('message', message => {
     if (message.author.id === client.user.id) return;
     if (message.guild) {
@@ -279,7 +279,7 @@ client.on('message', message => {
 //-------------------------------------الكيك
 
 //-------------------------------------الباند
-var prefix = "="
+var prefix = "#"
 client.on('message', message => {
     if (message.author.x5bz) return;
     if (!message.content.startsWith(prefix)) return;
@@ -332,7 +332,7 @@ client.on('message', message => {
 
 //-------------------------------------الساي
 
-var prefix = "=";
+var prefix = "#";
 client.on('message', message => {
     if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
@@ -378,7 +378,7 @@ client.on('message', message => {
 //-------------------------------------معلومات السيرفر
 
 client.on('message', message => {
-  var prefix = "=";
+  var prefix = "#";
     if (message.content.startsWith(prefix +"server")) {
         if (!message.channel.guild) return;
         const millis = new Date().getTime() - message.guild.createdAt.getTime();
@@ -414,7 +414,7 @@ client.on('message', message => {
 //-------------------------------------ايدي
 
 client.on("message", msg => {
-    var prefix = "=";
+    var prefix = "#";
     if (msg.content.startsWith(prefix + "ايدي")) {
         if (!msg.channel.guild) return msg.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');
         const embed = new Discord.RichEmbed();
@@ -437,7 +437,7 @@ client.on("message", msg => {
 
 //-------------------------------------مسح الشات
 client.on("message", message => {
-    var prefix = "=";
+    var prefix = "#";
             var args = message.content.substring(prefix.length).split(" ");
             if (message.content.startsWith(prefix + "clearall")) {
    if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('  ');
@@ -493,7 +493,7 @@ client.on('message', message => {
 //-------------------------------------صوره السيرفر
 
 client.on("message", message => {
-    const prefix = "="
+    const prefix = "#"
 
     if (!message.channel.guild) return;
     if (message.author.bot) return;
@@ -552,7 +552,7 @@ function timeCon(time) {
 
 //-------------------------------------ايمبيد
 
-var prefix = "=";
+var prefix = "#";
 
 client.on('message', message => {
     if (message.author.bot) return;
