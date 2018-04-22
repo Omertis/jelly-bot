@@ -151,7 +151,7 @@ message.react('📩')
 
 //-------------------------------------بوت
 client.on('message', message => {
-    var prefix = "#";
+    var prefix = "=";
     if (message.content.startsWith(prefix + "bot")) {
         const embed = new Discord.RichEmbed()
             .setColor("#6fc167")
@@ -169,7 +169,6 @@ client.on('message', message => {
 
 
 //-------------------------------------في رساله في الخااص !!
-var prefix = "#"
 client.on('message', function (message) {
     if (message.channel.type === "dm") {
         if (message.author.id === client.user.id) return;
@@ -187,7 +186,6 @@ client.on('message', function (message) {
 //-------------------------------------في رساله ب الخااص !!
 
 //-------------------------------------برودكستات السيرفر فقط
-var prefix = "#"
 client.on('message', message => {
     if (message.author.id === client.user.id) return;
     if (message.guild) {
@@ -280,7 +278,6 @@ client.on('message', message => {
 //-------------------------------------الكيك
 
 //-------------------------------------الباند
-var prefix = "#"
 client.on('message', message => {
     if (message.author.x5bz) return;
     if (!message.content.startsWith(prefix)) return;
@@ -333,7 +330,6 @@ client.on('message', message => {
 
 //-------------------------------------الساي
 
-var prefix = "df";
 client.on('message', message => {
     if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
@@ -357,7 +353,6 @@ client.on('message', message => {
 //-------------------------------------ح��له الاعضاع
 
 client.on('message', message => {
-    var prefix = "#";
     if (message.content.startsWith(prefix +'mb')) {
     const embed = new Discord.RichEmbed()
     .setDescription(`**Members info🔋
@@ -379,7 +374,6 @@ client.on('message', message => {
 //-------------------------------------معلومات السيرفر
 
 client.on('message', message => {
-  var prefix = "#";
     if (message.content.startsWith(prefix +"server")) {
         if (!message.channel.guild) return;
         const millis = new Date().getTime() - message.guild.createdAt.getTime();
@@ -415,7 +409,6 @@ client.on('message', message => {
 //-------------------------------------ايدي
 
 client.on("message", msg => {
-    var prefix = "#";
     if (msg.content.startsWith(prefix + "ايدي")) {
         if (!msg.channel.guild) return msg.reply('**:x: اسف لكن هذا الامر للسيرفرات فقط **');
         const embed = new Discord.RichEmbed();
@@ -438,7 +431,6 @@ client.on("message", msg => {
 
 //-------------------------------------مسح الشات
 client.on("message", message => {
-    var prefix = "#";
             var args = message.content.substring(prefix.length).split(" ");
             if (message.content.startsWith(prefix + "clearall")) {
    if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('  ');
@@ -494,7 +486,6 @@ client.on('message', message => {
 //-------------------------------------صوره السيرفر
 
 client.on("message", message => {
-    const prefix = "#"
 
     if (!message.channel.guild) return;
     if (message.author.bot) return;
@@ -553,7 +544,6 @@ function timeCon(time) {
 
 //-------------------------------------ايمبيد
 
-var prefix = "#";
 
 client.on('message', message => {
     if (message.author.bot) return;
@@ -742,7 +732,6 @@ client.on('guildDelete', guild => {
 //-------------------------------------تغير بدون اطفاء
 
 client.on('message', message => {
-    var prefix = "#";
 
     if (!message.content.startsWith(prefix)) return;
     var args = message.content.split(' ').slice(1);
@@ -952,7 +941,6 @@ channel.sendEmbed(embed)
 
    client.on('message', message => {   
 if (message.author.boss) return;
-var prefix = "#";
 if (!message.content.startsWith(prefix)) return;
 let command = message.content.split(" ")[0];
 command = command.slice(prefix.length);
@@ -1025,7 +1013,6 @@ client.on('guildMemberAdd', member=> {
     });
 
           client.on('message', function(message) {
-    var prefix = "#"
  
     if(message.content.startsWith(prefix + 'تفعيل')) {
         let guild = message.mentions.members.first();
@@ -1188,7 +1175,6 @@ client.on('ready', () => {
 
 
 client.on('message', message => {
-    var prefix = "#"
 if (message.content.startsWith(prefix + "uptime")) {
    let uptime = client.uptime;
 
@@ -1365,7 +1351,6 @@ if (message.content.startsWith("#addrole")) {
 });
 
 client.on('message', message => { 
-    var prefix = "#";
     if (message.author.boss) return;
     if (!message.content.startsWith(prefix)) return;
     let command = message.content.split(" ")[0];
@@ -1385,7 +1370,7 @@ client.on('message', message => {
 
 
 client.on('message', message => {
-    if (message.content === '#roles') {
+    if (message.content === '=roles') {
         var roles = message.guild.roles.map(roles => `${roles.name}, `).join(' ')
         const embed = new Discord.RichEmbed()
         .setColor('#6fc167')
@@ -1463,7 +1448,7 @@ const Sra7a = [
 'صراحه  |  ما هي أمنياتك المُستقبلية؟‏',
 ]
 client.on('message', message => {
-if (message.content.startsWith('#صراحة')) {
+if (message.content.startsWith('=صراحة')) {
   if(!message.channel.guild) return message.reply('** This command only for servers **');
 var client= new Discord.RichEmbed()
 .setTitle("لعبة صراحة ..")
@@ -1535,7 +1520,7 @@ const Za7f = [
 
 
 client.on('message', message => {
-if (message.content.startsWith("#عقاب")) {
+if (message.content.startsWith("=عقاب")) {
              if(!message.channel.guild) return message.reply('** This command only for servers**');
 var embed = new Discord.RichEmbed()
 .setColor('#6fc167')
@@ -1579,7 +1564,7 @@ const cuttweet = [
 ]
 
 client.on('message', message => {
-if (message.content.startsWith("#كت تويت")) {
+if (message.content.startsWith("=كت تويت")) {
              if(!message.channel.guild) return message.reply('** This command only for servers**');
 var embed = new Discord.RichEmbed()
 .setColor('#6fc167')
@@ -2054,33 +2039,10 @@ if( verifed.some(word => message.author.id.includes(word)) ) {    return message
 
 
 
-client.on("message", msg => {
-    var prefix = "<>";
-    if(msg.content.startsWith (prefix + "id")) {
-      var mentionned = msg.mentions.users.first();
-      var official;
-        if(mentionned){
-            var official = mentionned;} 
-            else 
-        {var official = msg.author;}
-        var roles = client.guilds.get(message.guild.id).roles.map(r => r.name);
-    if(!msg.channel.guild) return msg.reply("**:x: اسف لكن هذا الامر للسيرفرات فقط **");     
-    const embed = new Discord.RichEmbed();
-    embed.addField(":cloud_tornado:  الاسم", `**[ ${official.username}#${official.discriminator} ]**`, true)
-    .addField(":id:  الايدي", `**[ ${official.id} ]**`, true)
-    .setColor("RANDOM")
-    .setFooter(official.username , official.avatarURL)
-    .setThumbnail(`${official.avatarURL}`).setTimestamp()
-    .setURL(`${official.avatarURL}`)
-    .addField(":spy:  الحالة", `**[ ${official.presence.status.toUpperCase()} ]**`, true)
-    .addField(":satellite_orbital:   يلعب", `**[ ${official.presence.game === null ? "No Game" : official.presence.game.name} ]**`, true)
-    .addField(":military_medal:  الرتب", `**[ ${message.guild.roles.size} ]**`, true)
-    .addField(":robot:  هل هو بوت", `**[ ${official.bot.toString().toUpperCase()} ]**`, true);
-    msg.channel.send({embed: embed})}});
-  prefix +
+
 client .on("message", message => {
     let args = message.content.split(" ").slice(1);
-  if (message.content.startsWith(prefix +'u')) {
+  if (message.content.startsWith(prefix +'d')) {
         let user = message.mentions.users.first();
         let reason = args.slice(1).join(' ');
         let modlog = client.channels.find('name', 'report');
@@ -2570,57 +2532,6 @@ client.on("message", message => {
 
 
 
-var prefix = '#'; // This is the prefix, you can change it to whatever you want.
-
-// Listener Event: Runs whenever a message is received.
-client.on('message', message => {
-
-    // Variables - Variables make it easy to call things, since it requires less typing.
-    let msg = message.content.toUpperCase(); // This variable takes the message, and turns it all into uppercase so it isn't case sensitive.
-    let sender = message.author; // This variable takes the message, and finds who the author is.
-    let cont = message.content.slice(prefix.length).split(" "); // This variable slices off the prefix, then puts the rest in an array based off the spaces
-    let args = cont.slice(1); // This slices off the command in cont, only leaving the arguments.
-
-    // Commands
-
-    // Weather Command - We're going to need a new package for this, so open up the console again.
-    // Lets make a basic version of this, then make it look good.
-
-    if (msg.startsWith(prefix + 'weather')) { // This checks to see if the beginning of the message is calling the weather command.
-        // You can find some of the code used here on the weather-js npm page in the description.
-
-        weather.find({search: args.join(" "), degreeType: 'F'}, function(err, result) { // Make sure you get that args.join part, since it adds everything after weather.
-            if (err) console.log(err);
-
-            // We also want them to know if a place they enter is invalid.
-            if (result.length === 00) {
-                message.channel.send('**Please enter a valid location.**') // This tells them in chat that the place they entered is invalid.
-                return; // This exits the code so the rest doesn't run.
-            }
-
-            // Variables
-            var current = result[0].current; // This is a variable for the current part of the JSON output
-            var location = result[0].location; // This is a variable for the location part of the JSON output
-
-            // Let's use an embed for this.
-            const embed = new Discord.RichEmbed()
-                .setDescription(`**${current.skytext}**`) // This is the text of what the sky looks like, remember you can find all of this on the weather-js npm page.
-                .setAuthor(`Weather for ${current.observationpoint}`) // This shows the current location of the weather.
-                .setThumbnail(current.imageUrl) // This sets the thumbnail of the embed
-                .setColor(0x00AE86) // This sets the color of the embed, you can set this to anything if you look put a hex color picker, just make sure you put 0x infront of the hex
-                .addField('Timezone',`UTC${location.timezone}`, true) // This is the first field, it shows the timezone, and the true means `inline`, you can read more about this on the official discord.js documentation
-                .addField('Degree Type',location.degreetype, true)// This is the field that shows the degree type, and is inline
-                .addField('Temperature',`${current.temperature} Degrees`, true)
-                .addField('Feels Like', `${current.feelslike} Degrees`, true)
-                .addField('Winds',current.winddisplay, true)
-                .addField('Humidity', `${current.humidity}%`, true)
-
-                // Now, let's display it when called
-                message.channel.send({embed});
-        });
-    }
-
-});
 
 
 
