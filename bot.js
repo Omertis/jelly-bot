@@ -327,23 +327,7 @@ client.on('message', message => {
 
 //-------------------------------------الساي
 
-var prefix = "df";
-client.on('message', message => {
-    if (message.author.bot) return;
-    if (!message.content.startsWith(prefix)) return;
 
-    let command = message.content.split(" ")[0];
-    command = command.slice(prefix.length);
-
-    let args = message.content.split(" ").slice(1);
-
-    if (command == "fgfgfggfgfgy") {
-        message.channel.sendMessage(args.join("  "))
-
-        message.delete();
-    }
-
-});
 
 //-------------------------------------الساي
 
@@ -547,31 +531,7 @@ function timeCon(time) {
 
 //-------------------------------------ايمبيد
 
-var prefix = "=";
 
-client.on('message', message => {
-    if (message.author.bot) return;
-    if (!message.content.startsWith(prefix)) return;
-
-    let command = message.content.split(" ")[0];
-    command = command.slice(prefix.length);
-
-    let args = message.content.split(" ").slice(1);
-
-
-
-    if (command == "embed") {
-        let say = new Discord.RichEmbed()
-            .setDescription(args.join("  "))
-            .setColor("#6fc167")
-.setFooter("Jelly Bot™", 'https://cdn.discordapp.com/avatars/419865652547944458/960cc2c1fba9ab4f3b7497b6512b461d.png?size=2048')
-     .setTimestamp();
-        message.channel.sendEmbed(say);
-        message.delete();
-    }
-
-
-});
 
 //-------------------------------------ايمبيد
 
@@ -735,49 +695,7 @@ client.on('guildDelete', guild => {
 
 //-------------------------------------تغير بدون اطفاء
 
-client.on('message', message => {
-    var prefix = "=";
 
-    if (!message.content.startsWith(prefix)) return;
-    var args = message.content.split(' ').slice(1);
-    var argresult = args.join(' ');
-    if (message.author.id == 414307130821181441) return;
-
-
-    if (message.content.startsWith(prefix + 'playing')) {
-        if (message.author.id !== '414307130821181441') return message.reply('** هذا الأمر قفط لصاحب البوت و شكراًً **')
-        client.user.setGame(argresult);
-        message.channel.sendMessage(`**${argresult}** : تم تغيير الحالة`)
-    } else
-
-
-        if (message.content.startsWith(prefix + 'streem')) {
-            if (message.author.id !== '414307130821181441') return message.reply('** هذا الأمر قفط لصاحب البوت و شكراًً **')
-            client.user.setGame(argresult, "http://twitch.tv/y04zgamer");
-            message.channel.sendMessage(`**${argresult}** :تم تغيير الحالة الى ستريمنج`)
-        } else
-
-            if (message.content.startsWith(prefix + 'set-name')) {
-                if (message.author.id !== '414307130821181441') return message.reply('** هذا الأمر قفط لصاحب البوت و شكراًً **')
-                client.user.setUsername(argresult).then
-                message.channel.sendMessage(`**${argresult}** : تم تغير الأسم`)
-                return message.reply("**لا تستطيع تغير الأسم الا بعد ساعتين**");
-            } else
-
-                if (message.content.startsWith(prefix + 'set-avatar')) {
-                    if (message.author.id !== '414307130821181441') return message.reply('** هذا الأمر قفط لصاحب البوت و شكراًً **')
-                    client.user.setAvatar(argresult);
-                    message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
-                } else
-
-
-                    if (message.content.startsWith(prefix + 'watching')) {
-                        if (message.author.id !== '414307130821181441') return message.reply('** هذا الأمر قفط لصاحب البوت و شكراًً **')
-                        client.user.setActivity(argresult, { type: 'watching' });
-                        message.channel.sendMessage(`**${argresult}** : تم تغيير الووتشينق الى`)
-                    }
-
-});
 //-------------------------------------تغير بدون اطفاء
 
 
