@@ -246,12 +246,13 @@ client.on("message", message => {
             .setImage(message.guild.iconURL)
             .setURL(message.guild.iconrURL)
             .setTimestamp()
+.setFooter("Jelly Bot™", 'https://cdn.discordapp.com/avatars/419865652547944458/960cc2c1fba9ab4f3b7497b6512b461d.png?size=2048')
      .setTimestamp();
         message.channel.send({ embed });
     }
 });
 
-//-------------------------------------
+//-------------------------------------صوره السيرفر
 
 function timeCon(time) {
     let days = Math.floor(time % 31536000 / 86400)
@@ -264,8 +265,10 @@ function timeCon(time) {
     seconds = seconds > 9 ? seconds : '0' + seconds
     return `${days > 0 ? `${days}:` : ''}${(hours || days) > 0 ? `${hours}:` : ''}${minutes}:${seconds}`
 }
-//--------------------------------------------------------------------------
-client.on('message', message => {
+
+//-------------------------------------بنق
+
+ client.on('message', message => {
                                 if(!message.channel.guild) return;
                        if(message.content.startsWith(prefix +'ping')) {
                             if(!message.channel.guild) return;
@@ -277,10 +280,14 @@ client.on('message', message => {
                         .setColor('#6fc167')
                         .addField('`Time Taken`:',msg + " ms  ")
                         .addField('`Discord Api`:',api + " ms  ")
+.setFooter("Jelly Bot™", 'https://cdn.discordapp.com/avatars/419865652547944458/960cc2c1fba9ab4f3b7497b6512b461d.png?size=2048')
      .setTimestamp();
          message.channel.send({embed:embed});
+
+                        }
+                    });
 //--------------------------------------------------------------------------
-client.on('message', message => {
+ client.on('message', message => {
     if(message.content.startsWith(prefix +"info")) {
         message.channel.send({
             embed: new Discord.RichEmbed()
@@ -293,13 +300,12 @@ client.on('message', message => {
                 .addField('``RAM Usage``', `[${(process.memoryUsage().rss / 1048576).toFixed()}MB]`, true)
                 .addField('``My Name``', `[ ${client.user.tag} ]`, true)
                 .addField('``My ID``', `[ ${client.user.id} ]`, true)
-                .addField('``My Prefix``', `[ ${prefix} ]`, true)
+                .addField('``My Prefix``', `[ . ]`, true)
                 .addField('``My Language``', `[ Java Script ]`, true)
      })
     }
-});
+});                          
 //--------------------------------------------------------------------------
-                           
                            
                            
                            
