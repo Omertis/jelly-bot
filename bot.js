@@ -191,9 +191,132 @@ client.on('message', message => {
         message.channel.sendEmbed(embed);
     }
 });
+//--------------------------------------------------------------------------
+client.on('message', message => {
+     if(message.content.startsWith(prefix +"bans")) {
+        message.guild.fetchBans()
+        .then(bans => message.channel.send(`The ban count **${bans.size}** Person`))
+  .catch(console.error);
+}
+});
+//--------------------------------------------------------------------------
+client.on("message", message => {
+    var prefix = ".";
+    const command = message.content.split(" ")[0];
+
+    if(command == prefix+"vc"){
+
+        if (!message.guild.member(message.author).hasPermission('MOVE_MEMBERS') || !message.guild.member(message.author).hasPermission('ADMINISTRATOR')) {
+            return message.reply('you do not have permission to perform this action!');
+        }
+
+        var member = message.guild.members.get(message.mentions.users.array()[0].id);
+        if(!message.mentions.users){
+            message.reply("please mention the member")
+            return;
+        }
+
+    if(!member.voiceChannel){
+    message.reply("i can't include voice channel for member!")
+    return;
+    }
+              message.guild.createChannel('voicekick', 'voice').then(c => {
+                member.setVoiceChannel(c).then(() => {
+                    c.delete(305).catch(console.log)
+        
 
 
+    
+      });
+     });
+    }
+});
+//--------------------------------------------------------------------------
+client.on("message", message => {
+    const prefix = "."
 
+    if (!message.channel.guild) return;
+    if (message.author.bot) return;
+    if (message.content === prefix + "aserver") {
+        const embed = new Discord.RichEmbed()
 
+            .setTitle(`server avatar ** ${message.guild.name} **`)
+            .setAuthor(message.author.username, message.guild.iconrURL)
+            .setColor("#6fc167")
+            .setImage(message.guild.iconURL)
+            .setURL(message.guild.iconrURL)
+            .setTimestamp()
+     .setTimestamp();
+        message.channel.send({ embed });
+    }
+});
 
+//-------------------------------------
+
+function timeCon(time) {
+    let days = Math.floor(time % 31536000 / 86400)
+    let hours = Math.floor(time % 31536000 % 86400 / 3600)
+    let minutes = Math.floor(time % 31536000 % 86400 % 3600 / 60)
+    let seconds = Math.round(time % 31536000 % 86400 % 3600 % 60)
+    days = days > 9 ? days : '0' + days
+    hours = hours > 9 ? hours : '0' + hours
+    minutes = minutes > 9 ? minutes : '0' + minutes
+    seconds = seconds > 9 ? seconds : '0' + seconds
+    return `${days > 0 ? `${days}:` : ''}${(hours || days) > 0 ? `${hours}:` : ''}${minutes}:${seconds}`
+}
+//--------------------------------------------------------------------------
+client.on('message', message => {
+                                if(!message.channel.guild) return;
+                       if(message.content.startsWith(prefix +'ping')) {
+                            if(!message.channel.guild) return;
+                            var msg = `${Date.now() - message.createdTimestamp}`
+                            var api = `${Math.round(client.ping)}`
+                            if (message.author.bot) return;
+                        let embed = new Discord.RichEmbed()
+                        .setAuthor(message.author.username,message.author.avatarURL)
+                        .setColor('#6fc167')
+                        .addField('`Time Taken`:',msg + " ms  ")
+                        .addField('`Discord Api`:',api + " ms  ")
+     .setTimestamp();
+         message.channel.send({embed:embed});
+//--------------------------------------------------------------------------
+client.on('message', message => {
+    if(message.content.startsWith(prefix +"info")) {
+        message.channel.send({
+            embed: new Discord.RichEmbed()
+                .setAuthor(client.user.username, client.user.avatarURL)
+                .setThumbnail(client.user.avatarURL)
+                .setColor('#6fc167')
+                .setTitle('``INFO BULL`` ')
+                .addField('``Uptime``', [timeCon(process.uptime())], true)
+                .addField('``My Ping``', [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
+                .addField('``RAM Usage``', `[${(process.memoryUsage().rss / 1048576).toFixed()}MB]`, true)
+                .addField('``My Name``', `[ ${client.user.tag} ]`, true)
+                .addField('``My ID``', `[ ${client.user.id} ]`, true)
+                .addField('``My Prefix``', `[ ${prefix} ]`, true)
+                .addField('``My Language``', `[ Java Script ]`, true)
+     })
+    }
+});
+//--------------------------------------------------------------------------
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
+                           
 client.login(process.env.BOT_TOKEN);
