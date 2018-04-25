@@ -246,7 +246,6 @@ client.on("message", message => {
             .setImage(message.guild.iconURL)
             .setURL(message.guild.iconrURL)
             .setTimestamp()
-.setFooter("Jelly Bot™", 'https://cdn.discordapp.com/avatars/419865652547944458/960cc2c1fba9ab4f3b7497b6512b461d.png?size=2048')
      .setTimestamp();
         message.channel.send({ embed });
     }
@@ -280,7 +279,6 @@ function timeCon(time) {
                         .setColor('#6fc167')
                         .addField('`Time Taken`:',msg + " ms  ")
                         .addField('`Discord Api`:',api + " ms  ")
-.setFooter("Jelly Bot™", 'https://cdn.discordapp.com/avatars/419865652547944458/960cc2c1fba9ab4f3b7497b6512b461d.png?size=2048')
      .setTimestamp();
          message.channel.send({embed:embed});
 
