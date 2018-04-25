@@ -304,12 +304,279 @@ function timeCon(time) {
     }
 });                          
 //--------------------------------------------------------------------------
-                           
-                           
-                           
-                           
-                           
-                           
+client.on('message', message => {
+   if (message.content.startsWith(prefix +"id")) {
+        var args = message.content.split(" ").slice(1);
+        let user = message.mentions.users.first();
+        var men = message.mentions.users.first();
+       if(mentionned){
+            var official = mentionned;} 
+        var heg;
+        if(men) {
+            heg = men
+        } else {
+            heg = message.author
+        }
+      var mentionned = message.mentions.members.first();
+         var h;
+        if(mentionned) {
+            h = mentionned
+        } else {
+            h = message.member
+        }
+               moment.locale('ar-TN');
+      var id = new  Discord.RichEmbed()
+        .setColor("#6fc167")
+    .addField(': انضمامك لسيرفر قبل', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)
+    .addField(': دخولك لديسكورد قبل', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true)
+   .addField("Name",                              `** ${message.author.username}**`, true)
+   .addField("#",                                 `${message.author.discriminator} `, true)
+     .setTimestamp();
+        message.channel.send(id)
+}       });                           
+//-------------------------------------------------------------------------- LOG
+client.on("roleCreate",  rc => {
+const channel = rc.guild.channels.find("name", "log")
+if(channel) {
+  var embed = new Discord.RichEmbed()
+  .setTitle(` - Role Create`)
+  .setDescription(`A role Has been created \n Name : ${rc.name}`)
+  .setColor(`#6fc167`)
+     .setTimestamp();
+channel.sendEmbed(embed)
+}
+});
+
+client.on("roleDelete",  rd => {
+const channel = rd.guild.channels.find("name", "log")
+if(channel) {
+  var embed = new Discord.RichEmbed()
+  .setTitle(` - Role Delete`)
+  .setDescription(`A role has been deleted \n Name : ${rd.name}`)
+  .setColor(`#6fc167`)
+     .setTimestamp();
+channel.sendEmbed(embed)
+}
+});                           
+client.on('messageUpdate', (message, newMessage) => {
+  if (message.content === newMessage.content) return;
+  if (!message || !message.id || !message.content || !message.guild || message.author.bot) return;
+  const channel = message.guild.channels.find('name', 'log');
+  if (!channel) return;
+  
+  let embed = new Discord.RichEmbed()
+     .setAuthor(`${message.author.tag}`, message.author.avatarURL)
+     .setColor('#6fc167')
+     .setDescription(`✏ **Message sent by <@${message.author.id}> edited in** <#${message.channel.id}>\n\nOld:\n \`${message.cleanContent}\`\n\nNew:\n \`${newMessage.cleanContent}\``)
+     .setTimestamp();
+   channel.send({embed:embed});
+
+});
+// لوق الرسائل المنحذفه
+client.on('messageDelete', message => {
+  if (!message || !message.id || !message.content || !message.guild || message.author.bot) return;
+  const channel = message.guild.channels.find('name', 'log');
+  if (!channel) return;
+  
+  let embed = new Discord.RichEmbed()
+     .setAuthor(`${message.author.tag}`, message.author.avatarURL)
+     .setColor('#6fc167')
+     .setDescription(`🗑️ **Message sent by <@${message.author.id}> deleted in** <#${message.channel.id}>\n\n \`${message.cleanContent}\``)
+     .setTimestamp();
+   channel.send({embed:embed});
+
+});
+// لوق خروج اللاعبين
+client.on('guildMemberRemove', member => {
+  if (!member || !member.id || !member.guild) return;
+  const guild = member.guild;
+
+  const channel = member.guild.channels.find('name', 'log');
+  if (!channel) return;
+  let memberavatar = member.user.avatarURL
+  const fromNow = moment(member.joinedTimestamp).fromNow();
+  
+  let embed = new Discord.RichEmbed()
+     .setAuthor(`${member.user.tag}`, member.user.avatarURL)
+   .setThumbnail(memberavatar)
+     .setColor('#6fc167')
+     .setDescription(`📤 <@${member.user.id}> **left the server**\n\n **Had joined:** \n \`${fromNow}\``)
+     .setTimestamp();
+   channel.send({embed:embed});
+});
+// لوق دخول اللاعبين
+client.on('guildMemberAdd', member => {
+  if (!member || !member.id || !member.guild) return;
+  const guild = member.guild;
+
+  const channel = member.guild.channels.find('name', 'log');
+  if (!channel) return;
+  let memberavatar = member.user.avatarURL
+  const fromNow = moment(member.user.createdTimestamp).fromNow();
+  const isNew = (new Date() - member.user.createdTimestamp) < 900000 ? '🆕' : '';
+  
+  let embed = new Discord.RichEmbed()
+     .setAuthor(`${member.user.tag}`, member.user.avatarURL)
+   .setThumbnail(memberavatar)
+     .setColor('#6fc167')
+     .setDescription(`📥 <@${member.user.id}> **Joined the server**\n\n **Created:** \n \`${fromNow} ${isNew}\``)
+     .setTimestamp();
+   channel.send({embed:embed});
+});                           
+//--------------------------------------------------------------------------
+client.on('message', message => {   
+if (message.author.boss) return;
+var prefix = ".";
+if (!message.content.startsWith(prefix)) return;
+let command = message.content.split(" ")[0];
+command = command.slice(prefix.length);
+let args = message.content.split(" ").slice(1);
+if (command == "mute") {
+if (!message.channel.guild) return;
+if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("انت لا تملك صلاحيات !! ").then(msg => msg.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("البوت لايملك صلاحيات ").then(msg => msg.delete(5000));;
+let user = message.mentions.users.first();
+let muteRole = message.guild.roles.find("name", "Muted");
+if (!muteRole) return message.reply("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
+if (message.mentions.users.size < 1) return message.reply('** يجب عليك المنشن اولاً **').then(msg => {msg.delete(5000)});
+let reason = message.content.split(" ").slice(2).join(" ");
+message.guild.member(user).addRole(muteRole);
+const muteembed = new Discord.RichEmbed()
+.addField("**تم اعطاء الشخص ميوت فالخاص**")
+message.channel.send({embed : muteembed});
+var muteembeddm = new Discord.RichEmbed()
+.setAuthor(`Muted!`, user.displayAvatarURL)
+.setDescription(`
+${user} انت معاقب بميوت كتابي بسبب مخالفة القوانين 
+
+ ${message.author.tag} تمت معاقبتك بواسطة
+
+[ ${reason} ] : السبب
+
+اذا كانت العقوبة عن طريق الخطأ تكلم مع المسؤلين 
+`)
+.setFooter(` : ${message.guild.name}`)
+.setColor("#6fc167")
+ user.send( muteembeddm);
+}
+if (command == "unmute") {
+if (!message.channel.guild) return;
+if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("انتا لا تملك صلاحيات").then(msg => msg.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("البوت لايملك صلاحيات ").then(msg => msg.delete(5000));;
+let user = message.mentions.users.first();
+let muteRole = message.guild.roles.find("name", "Muted");
+if (!muteRole) return message.reply("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
+if (message.mentions.users.size < 1) return message.reply('** يجب عليك المنشن اولاً **').then(msg => {msg.delete(5000)});
+let reason = message.content.split(" ").slice(2).join(" ");
+message.guild.member(user).removeRole(muteRole);
+const unmuteembed = new Discord.RichEmbed()
+.addField("**تم اعطاء الشخص ميوت فالخاص**")
+message.channel.send({embed : unmuteembed}).then(msg => msg.delete(5000));
+var unmuteembeddm = new Discord.RichEmbed()
+.setDescription(`تم فك الميوت عنك ${user}`)
+.setAuthor(`UnMute!`, user.displayAvatarURL)
+.setColor("#6fc167")
+
+  user.send( unmuteembeddm);
+}
+});                           
+//--------------------------------------------------------------------------
+client.on('message', message => {
+    var prefix = "."
+if (message.content.startsWith(prefix + "uptime")) {
+   let uptime = client.uptime;
+
+   let days = 0;
+   let hours = 0;
+   let minutes = 0;
+   let seconds = 0;
+   let notCompleted = true;
+
+   while (notCompleted) {
+
+       if (uptime >= 8.64e+7) {
+
+           days++;
+           uptime -= 8.64e+7;
+
+       } else if (uptime >= 3.6e+6) {
+
+           hours++;
+           uptime -= 3.6e+6;
+
+       } else if (uptime >= 60000) {
+
+           minutes++;
+           uptime -= 60000;
+
+       } else if (uptime >= 1000) {
+           seconds++;
+           uptime -= 1000;
+
+       }
+
+       if (uptime < 1000)  notCompleted = false;
+
+   }
+
+   message.channel.send("`" + `${days} days, ${hours} hrs, ${minutes} min , ${seconds} sec` + "`");
+
+        message.delete();
+
+}
+});                           
+//--------------------------------------------------------------------------
+var roles = {}; 
+var prefix = '.'; 
+var token = "";
+
+
+ 
+client.on("message", message => {
+	var args = message.content.split(' ').slice(1); 
+	var msg = message.content.toLowerCase();
+	if( !message.guild ) return;
+	if( !msg.startsWith( prefix + 'role' ) ) return;
+	if( msg.toLowerCase().startsWith( prefix + 'roleremove' ) ){
+		if( !args[0] ) return message.reply( '**:x: يرجى وضع الشخص المراد سحب منه الرتبة**' );
+		if( !args[1] ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );
+		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
+		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
+		if( !role1 ) return message.reply( '**:x: يرجى وضع الرتبة المراد سحبها من الشخص**' );if( message.mentions.members.first() ){
+			message.mentions.members.first().removeRole( role1 );
+			return message.reply('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم سحب من **');
+		}
+		if( args[0].toLowerCase() == "all" ){
+			message.guild.members.forEach(m=>m.removeRole( role1 ))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من الكل رتبة**');
+		} else if( args[0].toLowerCase() == "bots" ){
+			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.removeRole(role1))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من البوتات رتبة**');
+		} else if( args[0].toLowerCase() == "humans" ){
+			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.removeRole(role1))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم سحب من البشريين رتبة**');
+		} 	
+	} else {
+		if( !args[0] ) return message.reply( '**:x: يرجى وضع الشخص المراد اعطائها الرتبة**' );
+		if( !args[1] ) return message.reply( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );
+		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
+		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
+		if( !role1 ) return message.reply( '**:x: يرجى وضع الرتبة المراد اعطائها للشخص**' );if( message.mentions.members.first() ){
+			message.mentions.members.first().addRole( role1 );
+			return message.reply('**:white_check_mark: [ '+role1.name+' ] رتبة [ '+args[0]+' ] تم اعطاء **');
+		}
+		if( args[0].toLowerCase() == "all" ){
+			message.guild.members.forEach(m=>m.addRole( role1 ))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء الكل رتبة**');
+		} else if( args[0].toLowerCase() == "bots" ){
+			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.addRole(role1))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء البوتات رتبة**');
+		} else if( args[0].toLowerCase() == "humans" ){
+			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.addRole(role1))
+			return	message.reply('**:white_check_mark: [ '+role1.name+' ] تم اعطاء البشريين رتبة**');
+		} 
+	} 
+});                           
                            
                            
                            
