@@ -545,6 +545,36 @@ client.on("message", message => {
 		} 
 	} 
 });                           
+
+
+var token = ""; 
+function isArabic(text) {
+    var pattern = /[\u0600-\u06FF\u0750-\u077F]/;
+    result = pattern.test(text);
+    return result;
+}
+client.on("message", message => { 
+    var args = message.content.toLowerCase().split(' ').slice(1).join(' ');   
+    if ( message.content.toLowerCase().startsWith( prefix + "roleuses" ) ){
+        if( !args ) return message.reply('**:x: please but the role name **');
+        var role = message.guild.roles.filter(r=>r.name.toLowerCase().indexOf(args)>-1).first();
+        if( !role ) return message.reply( "** :x: cant find role eith this name **" ); 
+        if( !isArabic(args) ) return message.reply('**:white_check_mark: [ '+message.guild.members.filter(m=>m.roles.get(role.id)).size+' ] is [ '+role.name+' ] the number of members have this role  **'); 
+        message.reply('**:white_check_mark: [ '+message.guild.members.filter(m=>m.roles.get(role.id)).size+' ] they have this role [ '+role.name+' ] is  **'); 
+    
+    } 
+});
+
+client.login(token);
+
+
+
+
+
+
+
+
+
 //--------------------------------------------------------------------------
 client.on('message', message => {
     if (message.content.startsWith(prefix + 'roles')) {
