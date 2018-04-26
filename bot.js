@@ -24,7 +24,7 @@ client.on('message', message => {
     let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
     let copy = "Dragon";
     let request = `Requested By ${message.author.username}`;
-    if (!args) return message.reply('**يجب عليك كتابة كلمة او جملة لإرسال البرودكاست**');message.channel.send(`**هل أنت متأكد من إرسالك البرودكاست؟ \nمحتوى البرودكاست:** \` ${args}\``).then(msg => {
+    if (!args) return message.reply('**You should write somthing t send**');message.channel.send(`**Are you sure you want to send the message \nMessage Info:** \` ${args}\``).then(msg => {
     msg.react('✅')
     .then(() => msg.react('❌'))
     .then(() =>msg.react('✅'))
