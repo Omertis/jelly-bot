@@ -6,7 +6,7 @@ const moment = require("moment");
 client.on('message', message => {
     if(message.content === prefix + 'help') {
         const embed = new Discord.RichEmbed()
-        .setColor('RANDOM')
+        .setColor('#34495E')
         .setTitle('___Bull Commands___')
         .setDescription('**Adminstartion Commands**')
         .addField(prefix + 'Kick','**To kick someone out of your server with reason**')
@@ -25,7 +25,7 @@ client.on('message', message => {
     var prefix = ".";
     if (message.content.startsWith(prefix + "bot")) {
         const embed = new Discord.RichEmbed()
-            .setColor("#6fc167")
+            .setColor("#34495E")
             .setDescription(`**my servers**🌐 **__${client.guilds.size}__**
 **Users Count**👥 **__${client.users.size}__**
 **channels Count**📚 **__${client.channels.size}__** `)
@@ -57,7 +57,7 @@ client.on('message', message => {
             .addField("Members Count", `
 **${message.guild.memberCount}**`)
             .setThumbnail(message.guild.iconURL)
-            .setColor('#6fc167')
+            .setColor('#34495E')
      .setTimestamp();
      message.channel.sendEmbed(embed)
 
@@ -95,7 +95,7 @@ client.on('message', message => {
 
         const kickembed = new Discord.RichEmbed()
             .setAuthor(`KICKED!`, user.displayAvatarURL)
-            .setColor("#6fc167")
+            .setColor("#34495E")
             .setTimestamp()
             .addField("**User:**", '**[ ' + `${user.tag}` + ' ]**')
             .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
