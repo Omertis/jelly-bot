@@ -303,37 +303,7 @@ function timeCon(time) {
      })
     }
 });                          
-//--------------------------------------------------------------------------
-client.on('message', message => {
-   if (message.content.startsWith(prefix +"id")) {
-        var args = message.content.split(" ").slice(1);
-        let user = message.mentions.users.first();
-        var men = message.mentions.users.first();
-       if(mentionned){
-            var official = mentionned;} 
-        var heg;
-        if(men) {
-            heg = men
-        } else {
-            heg = message.author
-        }
-      var mentionned = message.mentions.members.first();
-         var h;
-        if(mentionned) {
-            h = mentionned
-        } else {
-            h = message.member
-        }
-               moment.locale('ar-TN');
-      var id = new  Discord.RichEmbed()
-        .setColor("#6fc167")
-    .addField(': انضمامك لسيرفر قبل', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)
-    .addField(': دخولك لديسكورد قبل', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true)
-   .addField("Name",                              `** ${message.author.username}**`, true)
-   .addField("#",                                 `${message.author.discriminator} `, true)
-     .setTimestamp();
-        message.channel.send(id)
-}       });                           
+
 //-------------------------------------------------------------------------- LOG
 client.on("roleCreate",  rc => {
 const channel = rc.guild.channels.find("name", "log")
@@ -588,6 +558,37 @@ client.on('message', message => {
        message.channel.sendEmbed(embed);
     }
 });                                                                                                   
+//------------------------------------------------------------------------
+client.on('message', message => {
+   if (message.content.startsWith(prefix +"id")) {
+        var args = message.content.split(" ").slice(1);
+        let user = message.mentions.users.first();
+        var men = message.mentions.users.first();
+       if(mentionned){
+            var official = mentionned;} 
+        var heg;
+        if(men) {
+            heg = men
+        } else {
+            heg = message.author
+        }
+      var mentionned = message.mentions.members.first();
+         var h;
+        if(mentionned) {
+            h = mentionned
+        } else {
+            h = message.member
+        }
+               moment.locale('ar-TN');
+      var id = new  Discord.RichEmbed()
+        .setColor("#6fc167")
+    .addField(': انضمامك لسيرفر قبل', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)
+    .addField(': دخولك لديسكورد قبل', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true)
+   .addField("Name",                              `** ${message.author.username}**`, true)
+   .addField("#",                                 `${message.author.discriminator} `, true)
+     .setTimestamp();
+        message.channel.send(id)
+}       });
 //------------------------------------------------------------------------
                      
                            
