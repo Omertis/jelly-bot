@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const client = new Discord.Client({ fetchAllMembers: true });
+const moment = require("moment");
 
 client.on('message', message => {
     var prefix = ".";
