@@ -561,18 +561,78 @@ client.on('message', message => {
     if (message.content.startsWith(prefix + 'roles')) {
         var roles = message.guild.roles.map(roles => `${roles.name}, `).join(' ')
         const embed = new Discord.RichEmbed()
-        .setColor('#6fc167')
+        .setColor('#34495E')
         .addField('Roles:',`**[${roles}]**`)
  
        message.channel.sendEmbed(embed);
     }
 });                                                                                                   
 //------------------------------------------------------------------------
-
+client.on('message', message => {
+   if (message.content.startsWith(prefix +"id")) {
+        var args = message.content.split(" ").slice(1);
+        let user = message.mentions.users.first();
+        var men = message.mentions.users.first();
+       if(mentionned){
+            var official = mentionned;} 
+        var heg;
+        if(men) {
+            heg = men
+        } else {
+            heg = message.author
+        }
+      var mentionned = message.mentions.members.first();
+         var h;
+        if(mentionned) {
+            h = mentionned
+        } else {
+            h = message.member
+        }
+               moment.locale('ar-TN');
+      var id = new  Discord.RichEmbed()
+        .setColor("#34495E")
+    .addField(': دخولك للسيرفر قبل ', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)
+    .addField(': دخولك لديسكورد قبل', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true)
+   .addField("Name",                              `** ${message.author.username}**`, true)
+   .addField("#",                                 `${message.author.discriminator} `, true)
+     .setTimestamp();
+        message.channel.send(id)
+}       });
 //------------------------------------------------------------------------
-                     
+client.on('message', message => {
+   
+    if (message.content.startsWith(prefix +"رابط")) {
+        
+  message.channel.createInvite({
+        thing: true,
+        maxUses: 1,
+        maxAge: 86400
+    }).then(invite =>  
+      message.author.sendMessage(invite.url)
+    )
+    const embed = new Discord.RichEmbed()
+        .setColor("#34495E")
+        .setDescription("| :white_check_mark:  | :heart:  تم ارسال الرابط على الخاص  ")
+      message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
+              const Embed11 = new Discord.RichEmbed()
+        .setColor("#34495E")
+                .setAuthor(message.guild.name, message.guild.iconURL)
+        .setDescription(`
+
+**
+
+-[${message.guild.name}]  هذا هو رابط سيرفر
+---------------------
+-هذا الرابط صالح ل 1 مستخدم فقط
+-هذا الرابط صالح لمده 24 ساعه فقط
+
+**`)
+      message.author.sendEmbed(Embed11)
+    }
+});
+//------------------------------------------------------------------------                           
                            
-                           
+//------------------------------------------------------------------------                           
                            
                            
                            
