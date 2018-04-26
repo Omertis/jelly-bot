@@ -547,12 +547,12 @@ client.on("message", message => {
 });                           
 
 
+var prefix = '.';
 var token = ""; 
-function isArabic(text) {
+function isEnglish(text) {
     var pattern = /[\u0600-\u06FF\u0750-\u077F]/;
     result = pattern.test(text);
     return result;
-}
 client.on("message", message => { 
     var args = message.content.toLowerCase().split(' ').slice(1).join(' ');   
     if ( message.content.toLowerCase().startsWith( prefix + "roleuses" ) ){
