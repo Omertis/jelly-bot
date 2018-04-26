@@ -1,6 +1,26 @@
 const Discord = require("discord.js");
 const client = new Discord.Client({ fetchAllMembers: true });
 const moment = require("moment");
+//--------------------------------------------------------------------------
+const prefix = "."
+
+client.on('message', message => {
+    if(message.content === prefix + 'help') {
+        const embed = new Discord.RichEmbed()
+        .setColor('RANDOM')
+        .setTitle('___Bull Commands___')
+        .setDescription('**Adminstartion Commands**')
+        .addField(prefix + 'Kick','**To kick someone out of your server with reason**')
+        .addField(prefix + 'ban','**To ban someone out of your server with reason **')
+        .addField(prefix + 'mute','**To mute someone (Requier Muted Role)**')
+        .addField(prefix + 'unmute','**To remove the mute from someone (Requier Muted Role)**')
+        .addField(prefix + 'vc','**To kick someone from voice channel**')
+        .addField(prefix + 'clear','**To clear the chat**')
+        message.channel.send({embed})
+    }
+});
+
+//--------------------------------------------------------------------------
 
 client.on('message', message => {
     var prefix = ".";
@@ -15,8 +35,6 @@ client.on('message', message => {
 
     }
 });
-//--------------------------------------------------------------------------
-
 //--------------------------------------------------------------------------
 client.on('message', message => {
   var prefix = ".";
