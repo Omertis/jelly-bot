@@ -2,7 +2,6 @@ const Discord = require("discord.js");
 const client = new Discord.Client({ fetchAllMembers: true });
 const moment = require("moment");
 //--------------------------------------------------------------------------
-const prefix = "."
 
 client.on('message', message => {
     if(message.content === prefix + 'help') {
@@ -381,59 +380,59 @@ command = command.slice(prefix.length);
 let args = message.content.split(" ").slice(1);
 if (command == "mute") {
 if (!message.channel.guild) return;
-if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("انت لا تملك صلاحيات !! ").then(msg => msg.delete(5000));
-if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("البوت لايملك صلاحيات ").then(msg => msg.delete(5000));;
+if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("You do not have Permissions !! ").then(msg => msg.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("the bot do not have Permissions ").then(msg => msg.delete(5000));;
 let user = message.mentions.users.first();
 let muteRole = message.guild.roles.find("name", "Muted");
-if (!muteRole) return message.reply("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
-if (message.mentions.users.size < 1) return message.reply('** يجب عليك المنشن اولاً **').then(msg => {msg.delete(5000)});
+if (!muteRole) return message.reply("** i don't find the  'Muted'role **").then(msg => {msg.delete(5000)});
+if (message.mentions.users.size < 1) return message.reply('** You Should Mention someone first **').then(msg => {msg.delete(5000)});
 let reason = message.content.split(" ").slice(2).join(" ");
 message.guild.member(user).addRole(muteRole);
 const muteembed = new Discord.RichEmbed()
 .setColor("RANDOM")
 .setAuthor(`Muted!`, user.displayAvatarURL)
 .setThumbnail(user.displayAvatarURL)
-.addField("**:busts_in_silhouette:  المستخدم**",  '**[ ' + `${user.tag}` + ' ]**',true)
-.addField("**:hammer:  تم بواسطة **", '**[ ' + `${message.author.tag}` + ' ]**',true)
-.addField("**:book:  السبب**", '**[ ' + `${reason}` + ' ]**',true)
+.addField("**:busts_in_silhouette:  user**",  '**[ ' + `${user.tag}` + ' ]**',true)
+.addField("**:hammer:  muted by **", '**[ ' + `${message.author.tag}` + ' ]**',true)
+.addField("**:book:  reson**", '**[ ' + `${reason}` + ' ]**',true)
 .addField("User", user, true)  
 message.channel.send({embed : muteembed});
 var muteembeddm = new Discord.RichEmbed()
 .setAuthor(`Muted!`, user.displayAvatarURL)
 .setDescription(`
-${user} انت معاقب بميوت كتابي بسبب مخالفة القوانين 
+${user}  
 
- ${message.author.tag} تمت معاقبتك بواسطة
+ ${message.author.tag} you have been muted by
 
-[ ${reason} ] : السبب
+[ ${reason} ] : reason
 
-اذا كانت العقوبة عن طريق الخطأ تكلم مع المسؤلين 
+if this mute by mistake contact Admin
 `)
-.setFooter(`في سيرفر : ${message.guild.name}`)
+.setFooter(`on server : ${message.guild.name}`)
 .setColor("RANDOM")
  user.send( muteembeddm);
 }
 if (command == "unmute") {
 if (!message.channel.guild) return;
-if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("انتا لا تملك صلاحيات").then(msg => msg.delete(5000));
-if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("البوت لايملك صلاحيات ").then(msg => msg.delete(5000));;
+if(!message.guild.member(message.author).hasPermission("MANAGE_MESSAGES")) return message.reply("You do not have Permissions").then(msg => msg.delete(5000));
+if(!message.guild.member(client.user).hasPermission("MANAGE_MESSAGES")) return message.reply("the bot do not have Permissions ").then(msg => msg.delete(5000));;
 let user = message.mentions.users.first();
 let muteRole = message.guild.roles.find("name", "Muted");
-if (!muteRole) return message.reply("** لا يوجد رتبة الميوت 'Muted' **").then(msg => {msg.delete(5000)});
-if (message.mentions.users.size < 1) return message.reply('** يجب عليك المنشن اولاً **').then(msg => {msg.delete(5000)});
+if (!muteRole) return message.reply("** i don't find the  'Muted'role **").then(msg => {msg.delete(5000)});
+if (message.mentions.users.size < 1) return message.reply('** You Should Mention someone first**').then(msg => {msg.delete(5000)});
 let reason = message.content.split(" ").slice(2).join(" ");
 message.guild.member(user).removeRole(muteRole);
 const unmuteembed = new Discord.RichEmbed()
 .setColor("RANDOM")
 .setAuthor(`UnMute!`, user.displayAvatarURL)
 .setThumbnail(user.displayAvatarURL)
-.addField("**:busts_in_silhouette:  المستخدم**",  '**[ ' + `${user.tag}` + ' ]**',true)
-.addField("**:hammer:  تم بواسطة **", '**[ ' + `${message.author.tag}` + ' ]**',true)
-.addField("**:book:  السبب**", '**[ ' + `${reason}` + ' ]**',true)
+.addField("**:busts_in_silhouette:  user**",  '**[ ' + `${user.tag}` + ' ]**',true)
+.addField("**:hammer:   muted by**", '**[ ' + `${message.author.tag}` + ' ]**',true)
+.addField("**:book:  reason**", '**[ ' + `${reason}` + ' ]**',true)
 .addField("User", user, true)  
 message.channel.send({embed : unmuteembed}).then(msg => msg.delete(5000));
 var unmuteembeddm = new Discord.RichEmbed()
-.setDescription(`تم فك الميوت عنك ${user}`)
+.setDescription(`Mute has been decomposed of you ${user}`)
 .setAuthor(`UnMute!`, user.displayAvatarURL)
   user.send( unmuteembeddm);
 }
