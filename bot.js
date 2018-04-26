@@ -22,7 +22,7 @@ client.on('message', message => {
     if(!message.channel.guild) return message.channel.send('**This Command Only For Servers**').then(m => m.delete(5000));
   if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**Sorry,You do not have permission** `ADMINISTRATOR`' );
     let args = message.content.split(" ").join(" ").slice(2 + prefix.length);
-    let copy = "Dragon";
+    let copy = "Bull";
     let request = `Requested By ${message.author.username}`;
     if (!args) return message.reply('**You should write somthing t send**');message.channel.send(`**Are you sure you want to send the message \nMessage Info:** \` ${args}\``).then(msg => {
     msg.react('✅')
@@ -503,7 +503,9 @@ client.on("message", message => {
 	var msg = message.content.toLowerCase();
 	if( !message.guild ) return;
 	if( !msg.startsWith( prefix + 'role' ) ) return;
+	if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**Sorry,You do not have permission** `ADMINISTRATOR`' );
 	if( msg.toLowerCase().startsWith( prefix + 'roleremove' ) ){
+		if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**Sorry,You do not have permission** `ADMINISTRATOR`' );
 		if( !args[0] ) return message.reply( '**:x: Please place the role to be withdrawn from the person**' );
 		if( !args[1] ) return message.reply( '**:x: Please place the role to be withdrawn from the person**' );
 		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
