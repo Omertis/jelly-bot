@@ -622,7 +622,33 @@ client.on('message', message => {
     }
 });
 //------------------------------------------------------------------------                           
-                           
+client.on('message', message => {
+  if (message.content.startsWith(prefix + 'clear')) {
+  if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(`ماعندك هذا البرمشن[*MANAGE_MESSAGES*] `).catch(console.error);
+message.delete()
+if(!message.channel.guild) return;
+let args = message.content.split(" ").slice(1);
+
+const messagecount = parseInt(args.join(' '));
+message.channel.fetchMessages({
+
+limit: messagecount
+
+}).then(messages => message.channel.bulkDelete(messages));
+
+message.channel.sendMessage("", {embed: {
+  title: "``✅ ``",
+
+  color: 0x34495E,
+  footer:{
+     
+  
+      
+  }
+  }}).then(msg => {msg.delete(3000)});
+};
+
+});                           
 //------------------------------------------------------------------------                           
                            
                            
