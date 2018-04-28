@@ -15,7 +15,8 @@ client.on('message', message => {
         .addField(prefix + 'unmute','**To remove the mute from someone (Requier Muted Role)**')
         .addField(prefix + 'vc','**To kick someone from voice channel**')
         .addField(prefix + 'clear','**To clear the chat**')
-        message.channel.send({embed})
+       .addField('<:checkmark:439800491644289024> have a good time')
+	message.author.send({embed})
     }
 });
 
@@ -637,7 +638,7 @@ limit: messagecount
 }).then(messages => message.channel.bulkDelete(messages));
 
 message.channel.sendMessage("", {embed: {
-  title: "`<:checkmark:439800491644289024>`",
+  title: "<:checkmark:439800491644289024>",
 
   color: 0x34495E,
   footer:{
