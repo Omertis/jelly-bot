@@ -15,7 +15,7 @@ client.on('message', message => {
         .addField(prefix + 'unmute','**To remove the mute from someone (Requier Muted Role)**')
         .addField(prefix + 'vc','**To kick someone from voice channel**')
         .addField(prefix + 'clear','**To clear the chat**')
-       .addField('<:checkmark:439800491644289024> have a good time')
+       .addField('<:checkmark:439800491644289024><a:blob:439807830586032138> have a good time')
 	message.author.send({embed})
     }
 });
