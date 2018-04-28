@@ -494,45 +494,45 @@ client.on("message", message => {
 	var msg = message.content.toLowerCase();
 	if( !message.guild ) return;
 	if( !msg.startsWith( prefix + 'role' ) ) return;
-	if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**Sorry,You do not have permission** `ADMINISTRATOR`' );
+	if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**Sorry,You do not have permission** `ADMINISTRATOR`<:xx123:439800927457640448>' );
 	if( msg.toLowerCase().startsWith( prefix + 'roleremove' ) ){
 		if(!message.member.hasPermission('ADMINISTRATOR')) return      message.channel.send('**Sorry,You do not have permission** `ADMINISTRATOR`' );
-		if( !args[0] ) return message.reply( '**:x: Please place the role to be withdrawn from the person**' );
-		if( !args[1] ) return message.reply( '**:x: Please place the role to be withdrawn from the person**' );
+		if( !args[0] ) return message.reply( '**<:xx123:439800927457640448> Please place the role to be withdrawn from the person**' );
+		if( !args[1] ) return message.reply( '**<:xx123:439800927457640448> Please place the role to be withdrawn from the person**' );
 		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
 		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
-		if( !role1 ) return message.reply( '**:x: Please place the role to be withdrawn from the person**' );if( message.mentions.members.first() ){
+		if( !role1 ) return message.reply( '**<:xx123:439800927457640448> Please place the role to be withdrawn from the person**' );if( message.mentions.members.first() ){
 			message.mentions.members.first().removeRole( role1 );
-			return message.reply('**:white_check_mark: [ '+role1.name+' ] role [ '+args[0]+' ] removed from **');
+			return message.reply('** <:checkmark:439800491644289024> [ '+role1.name+' ] role [ '+args[0]+' ] removed from **');
 		}
 		if( args[0].toLowerCase() == "all" ){
 			message.guild.members.forEach(m=>m.removeRole( role1 ))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ] the role removed from all Members**');
+			return	message.reply('** <:checkmark:439800491644289024> [ '+role1.name+' ] the role removed from all Members**');
 		} else if( args[0].toLowerCase() == "bots" ){
 			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.removeRole(role1))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ] the role removed from all bots**');
+			return	message.reply('** <:checkmark:439800491644289024> [ '+role1.name+' ] the role removed from all bots**');
 		} else if( args[0].toLowerCase() == "humans" ){
 			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.removeRole(role1))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ] the role removed from all humans**');
+			return	message.reply('** <:checkmark:439800491644289024> [ '+role1.name+' ] the role removed from all humans**');
 		} 	
 	} else {
-		if( !args[0] ) return message.reply( '**:x: Please mention the person to be given the role**' );
-		if( !args[1] ) return message.reply( '**:x: Please mention the person to be given the role**' );
+		if( !args[0] ) return message.reply( '**<:xx123:439800927457640448> Please mention the person to be given the role**' );
+		if( !args[1] ) return message.reply( '**<:xx123:439800927457640448> Please mention the person to be given the role**' );
 		var role = msg.split(' ').slice(2).join(" ").toLowerCase(); 
 		var role1 = message.guild.roles.filter( r=>r.name.toLowerCase().indexOf(role)>-1 ).first(); 
-		if( !role1 ) return message.reply( '**:x: Please specify the role to be given to the person**' );if( message.mentions.members.first() ){
+		if( !role1 ) return message.reply( '**<:xx123:439800927457640448> Please specify the role to be given to the person**' );if( message.mentions.members.first() ){
 			message.mentions.members.first().addRole( role1 );
-			return message.reply('**:white_check_mark: [ '+role1.name+' ] role [ '+args[0]+' ] Was given **');
+			return message.reply('** <:checkmark:439800491644289024> [ '+role1.name+' ] role [ '+args[0]+' ] Was given **');
 		}
 		if( args[0].toLowerCase() == "all" ){
 			message.guild.members.forEach(m=>m.addRole( role1 ))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ] All role was given**');
+			return	message.reply('** <:checkmark:439800491644289024> [ '+role1.name+' ] All role was given**');
 		} else if( args[0].toLowerCase() == "bots" ){
 			message.guild.members.filter(m=>m.user.bot).forEach(m=>m.addRole(role1))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ]  The role bots were given**');
+			return	message.reply('** <:checkmark:439800491644289024> [ '+role1.name+' ]  The role bots were given**');
 		} else if( args[0].toLowerCase() == "humans" ){
 			message.guild.members.filter(m=>!m.user.bot).forEach(m=>m.addRole(role1))
-			return	message.reply('**:white_check_mark: [ '+role1.name+' ] The role humans were given**');
+			return	message.reply('** <:checkmark:439800491644289024> [ '+role1.name+' ] The role humans were given**');
 		} 
 	} 
 });                           
@@ -603,7 +603,7 @@ client.on('message', message => {
     )
     const embed = new Discord.RichEmbed()
         .setColor("#34495E")
-        .setDescription("| :white_check_mark:  | :heart:  تم ارسال الرابط على الخاص  ")
+        .setDescription("| <:checkmark:439800491644289024>  | :heart:  تم ارسال الرابط على الخاص  ")
       message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
               const Embed11 = new Discord.RichEmbed()
         .setColor("#34495E")
