@@ -606,7 +606,7 @@ client.on('message', Mess => {
     if ( Mess.content == prefix+'رابط'){
         try{
         Mess.channel.createInvite({maxAge: 86400 }).then(invite => {
-        Mess.member.send(invite.code);
+        Mess.member.send(invite.url);
         Mess.reply(` **Done, check your DM**<:checkmark:439800491644289024>.`).then(()=> tamp[id] = (new Date).getTime());
         });
         } catch(e){
