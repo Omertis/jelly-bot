@@ -593,7 +593,6 @@ client.on('message', message => {
 //------------------------------------------------------------------------
 pretty = require('pretty-ms')
 ,tamp={};
-client=new client.Client();
 
 client.on('message', Mess => {
     if(!Mess.guild) return;
@@ -622,14 +621,7 @@ client.on('message', Mess => {
 
 
 
----------------------
--هذا الرابط صالح ل 1 مستخدم فقط
--هذا الرابط صالح لمده 24 ساعه فقط
 
-**`)
-      message.author.sendEmbed(Embed11)
-    }
-});
 //------------------------------------------------------------------------                           
 client.on('message', message => {
   if (message.content.startsWith(prefix + 'clear')) {
