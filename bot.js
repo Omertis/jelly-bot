@@ -591,29 +591,37 @@ client.on('message', message => {
         message.channel.send(id)
 }       });
 //------------------------------------------------------------------------
-client.on('message', message => {
-   
-    if (message.content.startsWith(prefix +"رابط")) {
+pretty = require('pretty-ms')
+,tamp={};
+client=new client.Client();
+
+client.on('message', Mess => {
+    if(!Mess.guild) return;
+    let id = Mess.author.id,prefix=".";
+    if (tamp[id] && (new Date).getTime() - tamp[id] < 60*1000) {
+        let r = (new Date).getTime() - tamp[id];
+        r = 60*1000 - r;
+    Mess.reply(` **Sorry, wait ${pretty(r, {verbose:true})}**`);
+    return;
+    }
+    if ( Mess.content == prefix+'رابط'){
+        try{
+        Mess.channel.createInvite({maxAge: 86400}).then(invite => {
+        Mess.member.send(invite.code);
+        Mess.reply(` **Done, check your DM**<:checkmark:439800491644289024>.`).then(()=> tamp[id] = (new Date).getTime());
+        });
+        } catch(e){
+            console.log(e);
+        }
         
-  message.channel.createInvite({
-        thing: true,
-        maxUses: 1,
-        maxAge: 86400
-    }).then(invite =>  
-      message.author.sendMessage(invite.url)
-    )
-    const embed = new Discord.RichEmbed()
-        .setColor("#34495E")
-        .setDescription("| <:checkmark:439800491644289024>  | :heart:  تم ارسال الرابط على الخاص  ")
-      message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
-              const Embed11 = new Discord.RichEmbed()
-        .setColor("#34495E")
-                .setAuthor(message.guild.name, message.guild.iconURL)
-        .setDescription(`
 
-**
+    }
+});
 
--[${message.guild.name}]  هذا هو رابط سيرفر
+
+
+
+
 ---------------------
 -هذا الرابط صالح ل 1 مستخدم فقط
 -هذا الرابط صالح لمده 24 ساعه فقط
