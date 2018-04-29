@@ -601,12 +601,12 @@ client.on('message', Mess => {
     if (tamp[id] && (new Date).getTime() - tamp[id] < 60*1000) {
         let r = (new Date).getTime() - tamp[id];
         r = 60*1000 - r;
-    Mess.reply(` **Sorry, wait ${pretty(r, {verbose:true})}**`);
+    Mess.reply(` **Sorry, wait ${pretty(r, {verbose:true})}**<a:loading:439807730564464659>`);
     return;
     }
     if ( Mess.content == prefix+'رابط'){
         try{
-        Mess.channel.createInvite({maxAge: 86400}).then(invite => {
+        Mess.channel.createInvite({maxAge: 86400 }).then(invite => {
         Mess.member.send(invite.code);
         Mess.reply(` **Done, check your DM**<:checkmark:439800491644289024>.`).then(()=> tamp[id] = (new Date).getTime());
         });
