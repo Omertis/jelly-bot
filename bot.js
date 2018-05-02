@@ -587,7 +587,12 @@ client.on('message', message => {
     .addField(': دخولك لديسكورد قبل', `${moment(heg.createdTimestamp).format('YYYY/M/D HH:mm:ss')} **\n** \`${moment(heg.createdTimestamp).fromNow()}\`` ,true)
    .addField("Name",                              `** ${message.author.username}**`, true)
    .addField("#",                                 `${message.author.discriminator} `, true)
-     .setTimestamp();
+     .addField(': عدد الدعوات', inviteCount,false)
+.setFooter("-")  
+    message.channel.sendEmbed(id);
+})
+}
+      .setTimestamp();
         message.channel.send(id)
 }       });
 //------------------------------------------------------------------------
