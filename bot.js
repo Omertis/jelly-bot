@@ -594,7 +594,7 @@ var mentionned = message.mentions.members.first();
 .addField(': انضمامك لسيرفر قبل', `${moment(h.joinedAt).format('YYYY/M/D HH:mm:ss')} \n \`${moment(h.joinedAt).fromNow()}\``, true)
 .addField("Name",                              `** ${message.author.username}**`, true)
 .addField("#",                                 `${message.author.discriminator} `, true)
-.addField(': عدد الدعوات',                         **inviteCount**,false)
+.addField(': عدد الدعوات',                         inviteCount,false)
     message.channel.sendEmbed(id);
 })
 }
