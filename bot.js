@@ -670,15 +670,39 @@ const devs = ['426471752877604874'];
 client.on('message', message => {
 if(message.content === adminprefix + "restart") {
       if (!devs.includes(message.author.id)) return;
-          message.channel.send(`⚠️ **الشخص الذي اعاد تشغيل البوت ${message.author.username}**`);
-         message.channel.send(`⚠️ جاري اعادة تشغيل البوت... ⚠️`);
+          message.channel.send(`⚠️ **Done ${message.author.username}**`);
+        console.log(`⚠️ جاري اعادة تشغيل البوت... ⚠️`);
         client.destroy();
         child_process.fork(__dirname + "/bot.js");
-         message.channel.send(`تم اعادة تشغيل البوت`);
+        console.log(`تم اعادة تشغيل البوت`);
     }
   
-  });   
+  });
                            
-                           
+const arraySort = require('array-sort'),
+      table = require('table');
+
+client.on('message' , async (message) => {
+
+    if(message.content.startsWith(prefix + "top")) {
+
+  let invites = await message.guild.fetchInvites();
+
+    invites = invites.array();
+
+    arraySort(invites, 'uses', { reverse: true });
+
+    let possibleInvites = [['User', 'Uses']];
+    invites.forEach(i => {
+      possibleInvites.push([i.inviter.username , i.uses]);
+    })
+    const embed = new Discord.RichEmbed()
+    .setColor(0x7289da)
+    .setTitle("Invites")
+    .addField(' Top !' , `\`\`\`${table.table(possibleInvites)}\`\`\``)
+
+    message.channel.send(embed)
+    }
+});                           
                            
 client.login(process.env.BOT_TOKEN);
