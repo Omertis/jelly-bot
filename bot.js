@@ -708,7 +708,13 @@ client.on('message' , async (message) => {
 });                           
 
 
-
+client.on("message", message =>{
+      var em = require("codes-emojis");
+      if(message.author.bot) return null;
+     if(message.content.startsWith(prefix + "semoji"){
+         message.channel.send(em.codes(message));
+     }
+  });
    
 
 
