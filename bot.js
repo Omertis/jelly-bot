@@ -709,13 +709,7 @@ client.on('message' , async (message) => {
 
 
 
-   client.on("message", message =>{
-      var em = require("codes-forever");
-      if(message.author.bot) return null;
-     if(message.content == ".semoji"){
-         message.channel.send(em.codes(message));
-     }
-  });
+   
 
 
 
