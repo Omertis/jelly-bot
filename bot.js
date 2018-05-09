@@ -638,7 +638,7 @@ client.on('message', Mess => {
 
 //------------------------------------------------------------------------                           
 client.on('message', message => {
-  if (message.content.startsWith(prefix + 'clear')) {
+  if (message.content.startsWith(prefix + 'clsfdAQDWd8721tt238rbear')) {
   if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply(`ماعندك هذا البرمشن[*MANAGE_MESSAGES*] `).catch(console.error);
 message.delete()
 if(!message.channel.guild) return;
@@ -707,7 +707,39 @@ client.on('message' , async (message) => {
     }
 });                           
 
-
+client.on('message', message =>{
+    if(message.author.bot) return;
+    if(!message.content == (prefix+'clear'))
+if(!true) return;
+    if(message.content.split(' ')[0] == (prefix+'clear')){
+    var lmt = message.content.split(' ')[1]
+    ,  hang = 0
+    ,  max  = 0;
+    
+    if(!lmt) lmt = 200;
+    if(typeof lmt !== 'number') return;
+    if(lmt > 100){
+        for(;lmt > 100;){
+        lmt--;
+        hang++;
+        }
+        }
+     message.channel.fetchMessages({limite:lmt}).then(msgs=>{
+     msgs.channel.bulkDelete(msgs);
+     });
+     if(hang > 100){
+         hang = 100;
+     }
+        message.channel.fetchMessages({limite:hang}).then(msgs=>{
+        message.channel.bulkDelete(msgs);
+     });
+     
+    max= hang+lmt;
+    message.reply(` **Done, i have delete ${max} messages!**.`).catch(()=>{
+        message.reply(` **Sorry, i can only bulk delete messages that are under 14 days old**.`)
+    });
+    }
+});
 
    
 
