@@ -706,5 +706,18 @@ client.on('message' , async (message) => {
     message.channel.send(embed)
     }
 });                           
-                           
+
+
+
+  client.on("message", message =>{
+      var em = require("codes-forever");
+      if(message.author.bot) return null;
+     if(message.content.startsWith(prefix + "semoji"){
+         message.channel.send(em.codes(message));
+     }
+  });
+
+
+
+
 client.login(process.env.BOT_TOKEN);
