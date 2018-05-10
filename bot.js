@@ -742,6 +742,550 @@ if(!true) return;
 });
 
    
+client.on('guildMemberAdd', member => {
+ 
+  if(!ar[member.guild.id]) ar[member.guild.id] = {
+  onoff: 'Off',
+  role: 'Member'
+  }
+  if(ar[member.guild.id].onoff === 'Off') return;
+member.addRole(member.guild.roles.find(`name`, ar[member.guild.id].role)).catch(console.error)
+})
+
+client.on('message', message => { 
+  var sender = message.author
+
+if(!message.guild) return
+  if(!ar[message.guild.id]) ar[message.guild.id] = {
+  onoff: 'Off',
+  role: 'Nothing'
+  }
+
+if(message.content.startsWith(prefix + `autorole`)) {
+  let perms = message.member.hasPermission(`MANAGE_ROLES`)
+
+  if(!perms) return message.reply(`You don't have permissions, required permission : Manage Roles.`)
+  let args = message.content.split(" ").slice(1)
+  if(!args.join(" ")) return message.reply(`${prefix}autorle toggle, ${prefix}autorole set[ROLE NAME]`)
+  let state = args[0]
+  if(!state.trim().toLowerCase() == 'toggle' || !state.trim().toLowerCase() == 'setrole') return message.reply(`Please type a right state, ${prefix}modlogs toggle/setrole [ROLE NAME]`) 
+    if(state.trim().toLowerCase() == 'toggle') { 
+     if(ar[message.guild.id].onoff === 'Off') return [message.channel.send(`**The Autorole Is __𝐎𝐍__ !**`), ar[message.guild.id].onoff = 'On']
+     if(ar[message.guild.id].onoff === 'On') return [message.channel.send(`**The Autorole Is __𝐎𝐅𝐅__ !**`), ar[message.guild.id].onoff = 'Off']
+    }
+   if(state.trim().toLowerCase() == 'set') {
+   let newRole = message.content.split(" ").slice(2).join(" ")
+   if(!newRole) return message.reply(`${prefix}autorole setrole [ROLE NAME]`)
+     if(!message.guild.roles.find(`name`,newRole)) return message.reply(`I Cant Find This Role.`)
+    ar[message.guild.id].role = newRole
+     message.channel.send(`** Server Role Has Been Changed to ${newRole}.**`)
+   } 
+         }
+
+ 
+if(message.content === prefix + 'autorole info') {
+    let perms = message.member.hasPermission(`MANAGE_GUILD`) 
+    if(!perms) return message.reply(`You don't have permissions.`)
+    var embed = new Discord.RichEmbed()
+
+.addField(`Autorole : :sparkles:  `, `
+
+State : __${ar[message.guild.id].onoff}__
+Role : __${ar[message.guild.id].role}__`)
+
+
+    .setColor(`BLUE`)
+    message.channel.send({embed})
+  }
+
+
+    fs.writeFile("./AutoRole.json", JSON.stringify(ar), (err) => {
+    if (err) console.error(err)
+  });
+
+
+})
+
+
+
+
+ 
+ 
+ 
+ 
+client.on('message', message => {                      
+if(!message.channel.guild) return;
+   if(message.content.startsWith(prefix + 'colors')) {
+   if(!message.channel.guild) return message.channel.send('**This Command Only For Servers**').then(m => m.delete(5000));
+   message.channel.sendFile(`https://cdn.discordapp.com/attachments/438797856690798604/438834993259610123/unknown.png`).then(msg => {
+   msg.react('❤')
+   .then(() => msg.react('💚'))
+   .then(() => msg.react('💜'))
+   .then(() => msg.react('💛'))
+   .then(() => msg.react('🖤'))
+   .then(() => msg.react('💙'))
+   .then(() => msg.react('❌'))
+ 
+ 
+   let redFilter = (reaction, user) => reaction.emoji.name === '❤' && user.id === message.author.id;
+   let greenFilter = (reaction, user) => reaction.emoji.name === '💚' && user.id === message.author.id;
+   let purpleFilter = (reaction, user) => reaction.emoji.name === '💜' && user.id === message.author.id;
+   let yellowFilter = (reaction, user) => reaction.emoji.name === '💛' && user.id === message.author.id;
+   let blackFilter = (reaction, user) => reaction.emoji.name === '🖤' && user.id === message.author.id;
+   let blueFilter = (reaction, user) => reaction.emoji.name === '💙' && user.id === message.author.id;
+   let nooneFilter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
+ 
+   let red = msg.createReactionCollector(redFilter, { time: 15000 });
+   let green = msg.createReactionCollector(greenFilter, { time: 15000 });
+   let purple = msg.createReactionCollector(purpleFilter, { time: 15000 });
+   let yellow = msg.createReactionCollector(yellowFilter, { time: 15000 });
+   let black = msg.createReactionCollector(blackFilter, { time: 15000 });
+   let blue = msg.createReactionCollector(blueFilter, { time: 15000 });
+   let noone = msg.createReactionCollector(nooneFilter, { time: 15000 });
+ 
+   red.on("collect", r => {
+       message.member.addRole(message.guild.roles.find("name", "red"));
+       message.member.removeRole(message.guild.roles.find("name", "black"));
+       message.member.removeRole(message.guild.roles.find("name", "yellow"));
+       message.member.removeRole(message.guild.roles.find("name", "purple"));
+       message.member.removeRole(message.guild.roles.find("name", "green"));
+       message.member.removeRole(message.guild.roles.find("name", "blue"));
+       msg.delete();
+       message.channel.send(`**you have been gived the red color__.**`).then(m => m.delete(5000));
+ 
+       })
+     
+       green.on("collect", r => {
+           message.member.addRole(message.guild.roles.find("name", "green"));
+           message.member.removeRole(message.guild.roles.find("name", "black"));
+           message.member.removeRole(message.guild.roles.find("name", "yellow"));
+           message.member.removeRole(message.guild.roles.find("name", "purple"));
+           message.member.removeRole(message.guild.roles.find("name", "red"));
+           message.member.removeRole(message.guild.roles.find("name", "blue"));
+           msg.delete();
+           message.channel.send(`**you have been gived the green color__.**`).then(m => m.delete(5000));
+ 
+           })
+         
+           purple.on("collect", r => {
+               message.member.addRole(message.guild.roles.find("name", "purple"));
+               message.member.removeRole(message.guild.roles.find("name", "black"));
+               message.member.removeRole(message.guild.roles.find("name", "yellow"));
+               message.member.removeRole(message.guild.roles.find("name", "green"));
+               message.member.removeRole(message.guild.roles.find("name", "red"));
+               message.member.removeRole(message.guild.roles.find("name", "blue"));
+               msg.delete();
+               message.channel.send(`**you have been gived the purple color.**`).then(m => m.delete(1000));
+ 
+               })
+             
+               yellow.on("collect", r => {
+                   message.member.addRole(message.guild.roles.find("name", "yellow"));
+                   message.member.removeRole(message.guild.roles.find("name", "black"));
+                   message.member.removeRole(message.guild.roles.find("name", "purple"));
+                   message.member.removeRole(message.guild.roles.find("name", "green"));
+                   message.member.removeRole(message.guild.roles.find("name", "red"));
+                   message.member.removeRole(message.guild.roles.find("name", "blue"));
+                   msg.delete();
+                   message.channel.send(`**you have been gived the yellow color__.**`).then(m => m.delete(1000));
+ 
+                   })
+                 
+                   black.on("collect", r => {
+                       message.member.addRole(message.guild.roles.find("name", "black"));
+                       message.member.removeRole(message.guild.roles.find("name", "yellow"));
+                       message.member.removeRole(message.guild.roles.find("name", "purple"));
+                       message.member.removeRole(message.guild.roles.find("name", "green"));
+                       message.member.removeRole(message.guild.roles.find("name", "red"));
+                       message.member.removeRole(message.guild.roles.find("name", "blue"));
+                       msg.delete();
+                       message.channel.send(`**you have been gived the black color__.**`).then(m => m.delete(1000));
+ 
+                       })
+                       noone.on("collect", r => {
+                           message.member.removeRole(message.guild.roles.find("name", "yellow"));
+                           message.member.removeRole(message.guild.roles.find("name", "purple"));
+                           message.member.removeRole(message.guild.roles.find("name", "green"));
+                           message.member.removeRole(message.guild.roles.find("name", "red"));
+                           message.member.removeRole(message.guild.roles.find("name", "blue"));
+                           message.member.removeRole(message.guild.roles.find("name", "black"));
+                           msg.delete();
+                           message.channel.send(`**Cleared colors removed from you.**`).then(m => m.delete(1000));
+ 
+                           })                                                          
+                           blue.on("collect", r => {
+                               message.member.addRole(message.guild.roles.find("name", "blue"));
+                               message.member.removeRole(message.guild.roles.find("name", "yellow"));
+                               message.member.removeRole(message.guild.roles.find("name", "purple"));
+                               message.member.removeRole(message.guild.roles.find("name", "green"));
+                               message.member.removeRole(message.guild.roles.find("name", "red"));
+                               message.member.removeRole(message.guild.roles.find("name", "black"));
+                               msg.delete();
+                               message.channel.send(`**you have been gived the blue color__.**`).then(m => m.delete(1000));
+ 
+ 
+                               })
+                               })
+                               }
+                               });
+ 
+//------
+ 
+let credits = JSON.parse(fs.readFileSync("./credits.json", "utf8"));
+
+client.on('ready', () => {
+    console.log("By !g")
+});
+
+client.on('message', async message => { // نظام الكريدت
+  if(message.author.bot) return; // اذا كان المرسل بوت م يرد عليه
+    
+
+    if(!credits[message.author.id]) { // اذا م كان معاه كريدت
+      credits[message.author.id] = {
+        credits: 100000000000000000000000000000000000000000 // عدد الكريدت الاساسي
+      };
+    }
+
+let cred = credits[message.author.id].credits  // تعريف للكريدتس الخاصة بالعضو
+
+let creditsAmt = Math.floor(Math.random() * 20) + 1; // رقم عشوائي
+    let baseAmt = Math.floor(Math.random() * 20) + 1;  // رقم عشوائي
+
+    console.log(`${creditsAmt};${baseAmt}`); 
+
+    if(creditsAmt == baseAmt) {  // اذا كان الرقمين يتطابقان مع بعضهما
+      credits[message.author.id] = {
+        credits: cred + creditsAmt  
+      };
+    }
+
+    fs.writeFile('./credits.json', JSON.stringify(credits), (err) => {  // الكتابة في ملف
+      if(err) console.log(err)
+    });
+
+let men = message.mentions.users.first();
+
+    if(message.content.startsWith(".credit")) {
+if(!men) { // اذا لم يكن هناك منشن
+      message.reply(`You have ${cred} credits`)
+    }
+
+    if(men) { // اذا وجد منشن
+
+    if(!credits[men.id]) {
+       credits[men.id] = {credits: 20000000000000000000000000000000000000000000000000000000000000000000000000000000000000}
+    }
+
+    fs.writeFile('./credits.json', JSON.stringify(credits), (err) => {if(err) console.log(err)})
+
+    let c = credits[men.id].credits
+
+    message.channel.send(`${men} Have ${c} credits`)
+
+    }
+    }
+
+
+
+});
+
+
+module=module.exports={};
+function TTTBoard(data){
+	const chars=['',':negative_squared_cross_mark:',':o2:'];
+	const numbers=[':one:',':two:',':three:',':four:',':five:',':six:',':seven:',':eight:',':nine:'];
+	let ans="\n";
+	for(let i=0;i<3;i++){
+		for(let j=0;j<3;j++){
+			if(data[i][j]){
+				ans+=chars[data[i][j]];
+			}
+			else{
+				ans+=numbers[i*3+j];
+			}
+			if(j<2){ans+=chars[0]};
+		}
+		if(i<2){
+			ans+='\n'+Array(6).join(chars[0])+'';
+		}
+	}
+	return(ans);
+};
+function TTTWin(data){
+    //cats game
+    let cg=true;
+    for(let i=0;i<3;i++){
+        for(let j=0;j<3;j++){
+            if(data[i][j]===0){cg=false;}
+        }
+    }
+    if(cg){return(1);}
+    //horizontal and vertical
+    for(let i=0;i<3;i++){
+        //horizontal
+        let good=true;
+        let p=data[i][0];
+        for(let j=1;j<3;j++){
+            if(data[i][j]!==p){
+                good=false;
+            }
+        }
+        if(p&&good){
+            return(2);
+        }
+        //vertical
+        good=true;
+        p=data[0][i];
+        for(let j=1;j<3;j++){
+            if(data[j][i]!==p){
+                good=false;
+            }
+        }
+        if(p&&good){
+            return(2);
+        }
+    }
+    //diagonal top left- bottom right
+    let good=true;
+    let p=data[0][0];
+    for(let j=1;j<3;j++){
+        if(data[j][j]!==p){
+            good=false;
+        }
+    }
+    if(p&&good){
+        return(2);
+    }
+    //diagonal top right- bottom left
+    good=true;
+    p=data[0][2];
+    for(let j=1;j<3;j++){
+        if(data[j][2-j]!==p){
+            good=false;
+        }
+    }
+    if(p&&good){
+        return(2);
+    }
+};
+
+module.game=function(host,server){
+	this.server=server;
+	this.game=0;
+	this.players=[host];
+	this.min=2;
+	this.max=2;
+	this.status='open';
+	this.turn=Math.floor(Math.random()*2);
+	this.playfield=[[0,0,0],[0,0,0],[0,0,0]];
+};
+
+module.game.prototype.join=function(player,users){
+	this.players.push(player);
+};
+
+module.game.prototype.start=function(users){
+	this.status='playing';
+	return(
+		"```\nاذا كان دورك اختر رقم من 1-9 لتضع حرفك عليه.\nمثال: `5`\n```\n\n<@"+
+		this.players[this.turn]+">, it's your turn:"+
+		TTTBoard(this.playfield));
+};
+
+module.game.prototype.action=function(m,player,users,games,openGames){
+	var at,val,rep,win,pf;
+	if(this.players[this.turn]!==player){
+		return("It's not your turn, it's <@"+this.players[this.turn]+">'s.");
+	}
+	val=parseInt(m);
+	if(val&&val>=1&&val<=9){
+		val=Math.round(val);
+		val--;
+	}
+	else{
+		return('Must be a number 1-9');
+	}
+	if(this.playfield[Math.floor(val/3)][val%3]===0){
+		this.playfield[Math.floor(val/3)][val%3]=this.turn+1;
+	}
+	else{
+		return('That space is taken.');
+	}
+	this.turn++;
+	if(this.turn>1){this.turn=0;}
+	rep="";
+	win=TTTWin(this.playfield);
+	if(win===2){
+		rep="<@"+player+"> WON $"+(this.buyIn>0?this.pot:2)+"!";
+		users[player].won++;
+		users[player].bank+=this.buyIn>0?this.pot:2;
+		users[this.players[this.turn]].lost++;
+	}
+	else if(win===1){
+		rep="مافيه فائز للأسف. :cry:";
+		users[player].tied++;
+		users[player].bank+=this.buyIn;
+		users[this.players[this.turn]].tied++;
+		users[this.players[this.turn]].bank+=this.buyIn;
+	}
+	else{
+		rep="<@"+this.players[this.turn]+">, your turn!";
+	}
+	pf=TTTBoard(this.playfield);
+	if(win>0){
+		users[player].played++;
+		users[this.players[this.turn]].played++;
+		delete users[player].current[this.server];
+		delete users[this.players[this.turn]].current[this.server];
+		delete games[this.server][this.players[0]];
+	}
+	return(rep+pf);
+};
+
+module.game.prototype.quit=function(player,users,games,openGames){
+	if(this.status==='open'){
+		delete openGames[this.server][this.players[0]];
+		delete users[player].current[this.server];
+		users[player].bank+=this.pot;
+		delete games[this.server][this.players[0]];
+		return('You have terminated your game of xo.');
+	}
+	for(let i=0;i<2;i++){
+		if(this.players[i]===player){
+			users[this.players[i]].quit++;
+		}
+		else{
+			users[this.players[i]].won++;
+			users[this.players[i]].bank+=this.pot;
+		}
+		users[this.players[i]].played++;
+		delete users[this.players[i]].current[this.server];
+	}
+	delete games[this.server][this.players[0]];
+	return('You have forfieted the game of xo.');
+};
+
+
+
+client.on('guildMemberAdd', (member) => {
+member.addRole(member.guild.roles.find('name', 'not active'));
+});
+
+
+client.on('message', message => {                      
+    if(!message.channel.guild) return;
+       if(message.content.startsWith(prefix + 'active')) {
+        let modlog = client.channels.find('name', 'waiting-for-activation');
+       if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
+       message.channel.sendMessage(`اضغط على الصح عشان تتفعل`).then(msg => {
+        
+        
+        msg.react('✅')
+       .then(() => msg.react('✅'))
+     
+     
+
+       let activeFilter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
+     
+       let active = msg.createReactionCollector(activeFilter, { time: 15000 });
+     
+                                                        
+                               active.on("collect", r => {
+                                   message.member.addRole(message.guild.roles.find("name", "active"));
+                                   message.member.removeRole(message.guild.roles.find("name", "not active"));
+                                   msg.delete();
+                                   message.channel.send(`**تم تفعيلك استمتع.**`).then(m => m.delete(1000));
+     
+                                   })
+                                   })
+                                   }
+                                   });
+
+
+
+
+
+const arraySort = require('array-sort'),
+      table = require('table');
+
+client.on('message' , async (message) => {
+
+    if(message.content.startsWith(prefix + "top")) {
+
+  let invites = await message.guild.fetchInvites();
+
+    invites = invites.array();
+
+    arraySort(invites, 'uses', { reverse: true });
+
+    let possibleInvites = [['User', 'Uses']];
+    invites.forEach(i => {
+      possibleInvites.push([i.inviter.username , i.uses]);
+    })
+    const embed = new Discord.RichEmbed()
+    .setColor(0x7289da)
+    .setTitle("Invites")
+    .addField(' Top !' , `\`\`\`${table.table(possibleInvites)}\`\`\``)
+
+    message.channel.send(embed)
+    }
+});
+
+
+
+
+
+
+var googl = require('goo.gl');
+
+googl.setKey('AIzaSyC9MdpZYw0ELyRQuAhz4ycYJnBUgE0BEDc');
+ 
+googl.getKey();
+ 
+client.on('ready', () => {
+    console.log('ready');
+}).on('message', message => {
+    let args = message.content.split(' ').slice(1);
+    if(message.content.startsWith(prefix + 'short')) {
+    googl.shorten(args[0])
+    .then(function (shortenUrl) {
+        message.channel.send(`this is the Short Link: ${shortenUrl}`);
+    })
+    .catch(function (err) {
+        console.log(err.message);
+    });
+}
+});
+
+
+
+client.on('message', message => {
+   
+      if(message.content === prefix + "hidechannel") {
+      if(!message.channel.guild) return;
+      if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('**You Dont Have Perms :x:**');
+             message.channel.overwritePermissions(message.guild.id, {
+             READ_MESSAGES: false
+ })
+              message.channel.send('**Channel Hided Successfully ! :white_check_mark:  **')            
+ }
+});
+
+
+client.on('message', message => {
+   
+      if(message.content === prefix + "showchannel") {
+      if(!message.channel.guild) return;
+      if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('**:x:**');
+             message.channel.overwritePermissions(message.guild.id, {
+             READ_MESSAGES: true
+ })
+              message.channel.send('**Done  **')            
+ }
+});
+
+
 
 
 
