@@ -21,6 +21,135 @@ client.on('message', message => {
 });
 
 
+let ar = JSON.parse(fs.readFileSync("./AutoRole.json", "utf8"))
+
+const prefix = ".";
+
+client.on('guildMemberAdd', member => {
+ 
+  if(!ar[member.guild.id]) ar[member.guild.id] = {
+  onoff: 'Off',
+  role: 'Member'
+  }
+  if(ar[member.guild.id].onoff === 'Off') return;
+member.addRole(member.guild.roles.find(`name`, ar[member.guild.id].role)).catch(console.error)
+})
+
+client.on('message', message => { 
+  var sender = message.author
+
+if(!message.guild) return
+  if(!ar[message.guild.id]) ar[message.guild.id] = {
+  onoff: 'Off',
+  role: 'Nothing'
+  }
+
+if(message.content.startsWith(prefix + `autorole`)) {
+  let perms = message.member.hasPermission(`MANAGE_ROLES`)
+
+  if(!perms) return message.reply(`You don't have permissions, required permission : Manage Roles.`)
+  let args = message.content.split(" ").slice(1)
+  if(!args.join(" ")) return message.reply(`${prefix}autorle toggle, ${prefix}autorole set[ROLE NAME]`)
+  let state = args[0]
+  if(!state.trim().toLowerCase() == 'toggle' || !state.trim().toLowerCase() == 'setrole') return message.reply(`Please type a right state, ${prefix}modlogs toggle/setrole [ROLE NAME]`) 
+    if(state.trim().toLowerCase() == 'toggle') { 
+     if(ar[message.guild.id].onoff === 'Off') return [message.channel.send(`**The Autorole Is __𝐎𝐍__ !**`), ar[message.guild.id].onoff = 'On']
+     if(ar[message.guild.id].onoff === 'On') return [message.channel.send(`**The Autorole Is __𝐎𝐅𝐅__ !**`), ar[message.guild.id].onoff = 'Off']
+    }
+   if(state.trim().toLowerCase() == 'set') {
+   let newRole = message.content.split(" ").slice(2).join(" ")
+   if(!newRole) return message.reply(`${prefix}autorole setrole [ROLE NAME]`)
+     if(!message.guild.roles.find(`name`,newRole)) return message.reply(`I Cant Find This Role.`)
+    ar[message.guild.id].role = newRole
+     message.channel.send(`** Server Role Has Been Changed to ${newRole}.**`)
+   } 
+         }
+
+ 
+if(message.content === prefix + 'autorole info') {
+    let perms = message.member.hasPermission(`MANAGE_GUILD`) 
+    if(!perms) return message.reply(`You don't have permissions.`)
+    var embed = new Discord.RichEmbed()
+
+.addField(`Autorole : :sparkles:  `, `
+
+State : __${ar[message.guild.id].onoff}__
+Role : __${ar[message.guild.id].role}__`)
+
+
+    .setColor(`BLUE`)
+    message.channel.send({embed})
+  }
+
+
+    fs.writeFile("./AutoRole.json", JSON.stringify(ar), (err) => {
+    if (err) console.error(err)
+  });
+
+
+})
+
+
+
+
+client.on('message', message => {                      
+    if(!message.channel.guild) return;
+       if(message.content.startsWith(prefix + 'active')) {
+        let modlog = client.channels.find('name', 'waiting-for-activation');
+       if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
+       message.channel.sendMessage(`اضغط على الصح عشان تتفعل`).then(msg => {
+        
+        
+        msg.react('✅')
+       .then(() => msg.react('✅'))
+     
+     
+
+       let activeFilter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
+     
+       let active = msg.createReactionCollector(activeFilter, { time: 15000 });
+     
+                                                        
+                               active.on("collect", r => {
+                                   message.member.addRole(message.guild.roles.find("name", "active"));
+                                   message.member.removeRole(message.guild.roles.find("name", "not active"));
+                                   msg.delete();
+                                   message.channel.send(`**تم تفعيلك استمتع.**`).then(m => m.delete(1000));
+     
+                                   })
+                                   })
+                                   }
+                                   });
+
+
+
+client.on('message', message => {
+   
+      if(message.content === prefix + "hidechannel") {
+      if(!message.channel.guild) return;
+      if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('**You Dont Have Perms :x:**');
+             message.channel.overwritePermissions(message.guild.id, {
+             READ_MESSAGES: false
+ })
+              message.channel.send('**Channel Hided Successfully ! :white_check_mark:  **')            
+ }
+});
+
+
+client.on('message', message => {
+   
+      if(message.content === prefix + "showchannel") {
+      if(!message.channel.guild) return;
+      if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('**:x:**');
+             message.channel.overwritePermissions(message.guild.id, {
+             READ_MESSAGES: true
+ })
+              message.channel.send('**Done  **')            
+ }
+});
+
+
+
 client.on('message', msg => {
   if (msg.author.bot) return;
   if (!msg.content.startsWith(prefix)) return;
