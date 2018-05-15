@@ -23,7 +23,6 @@ client.on('message', message => {
 
 let ar = JSON.parse(fs.readFileSync("./AutoRole.json", "utf8"))
 
-const prefix = ".";
 
 client.on('guildMemberAdd', member => {
  
