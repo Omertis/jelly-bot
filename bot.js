@@ -2,7 +2,7 @@ const Discord = require("discord.js")
 const client = new Discord.Client()
 const fs = require("fs")
 
-let p = JSON.parse(fs.readFileSync('./prefix.json', 'utf8'))
+let p = JSON.parse(fs.readFileSync(`./prefixes.json`, `utf8`))
 client.on('message', message => {
     let newp = message.content.split(" ").slice(1).join(" ")
     if(!p[message.guild.id]) p[message.guild.id] = {
