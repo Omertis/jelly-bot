@@ -1,6 +1,8 @@
 const Discord = require("discord.js");
 const client = new Discord.Client({ fetchAllMembers: true });
 const moment = require("moment");
+const fs = require("fs")
+
 //--------------------------------------------------------------------------
 
 client.on('message', message => {
@@ -20,6 +22,59 @@ client.on('message', message => {
     }
 });
 
+
+client.on('message', message => {                      
+    if(!message.channel.guild) return;
+       if(message.content.startsWith(prefix + 'active')) {
+        let modlog = client.channels.find('name', 'waiting-for-activation');
+       if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
+       message.channel.sendMessage(`اضغط على الصح عشان تتفعل`).then(msg => {
+        
+        
+        msg.react('✅')
+       .then(() => msg.react('✅'))
+     
+     
+
+       let activeFilter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
+     
+       let active = msg.createReactionCollector(activeFilter, { time: 15000 });
+     
+                                                        
+                               active.on("collect", r => {
+                                   message.member.addRole(message.guild.roles.find("name", "active"));
+                                   message.member.removeRole(message.guild.roles.find("name", "not active"));
+                                   msg.delete();
+                                   message.channel.send(`**تم تفعيلك استمتع.**`).then(m => m.delete(1000));
+     
+                                   })
+                                   })
+                                   }
+                                   });
+client.on('message', message => {
+   
+      if(message.content === prefix + "hidechannel") {
+      if(!message.channel.guild) return;
+      if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('**You Dont Have Perms :x:**');
+             message.channel.overwritePermissions(message.guild.id, {
+             READ_MESSAGES: false
+ })
+              message.channel.send('**Channel Hided Successfully ! :white_check_mark:  **')            
+ }
+});
+
+
+client.on('message', message => {
+   
+      if(message.content === prefix + "showchannel") {
+      if(!message.channel.guild) return;
+      if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('**:x:**');
+             message.channel.overwritePermissions(message.guild.id, {
+             READ_MESSAGES: true
+ })
+              message.channel.send('**Done  **')            
+ }
+});
 
 let ar = JSON.parse(fs.readFileSync("./AutoRole.json", "utf8"))
 
@@ -91,62 +146,125 @@ Role : __${ar[message.guild.id].role}__`)
 
 
 
+ 
+ 
+ 
+ 
 client.on('message', message => {                      
-    if(!message.channel.guild) return;
-       if(message.content.startsWith(prefix + 'active')) {
-        let modlog = client.channels.find('name', 'waiting-for-activation');
-       if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
-       message.channel.sendMessage(`اضغط على الصح عشان تتفعل`).then(msg => {
-        
-        
-        msg.react('✅')
-       .then(() => msg.react('✅'))
+if(!message.channel.guild) return;
+   if(message.content.startsWith(prefix + 'colors')) {
+   if(!message.channel.guild) return message.channel.send('**This Command Only For Servers**').then(m => m.delete(5000));
+   message.channel.sendFile(`https://cdn.discordapp.com/attachments/438797856690798604/438834993259610123/unknown.png`).then(msg => {
+   msg.react('❤')
+   .then(() => msg.react('💚'))
+   .then(() => msg.react('💜'))
+   .then(() => msg.react('💛'))
+   .then(() => msg.react('🖤'))
+   .then(() => msg.react('💙'))
+   .then(() => msg.react('❌'))
+ 
+ 
+   let redFilter = (reaction, user) => reaction.emoji.name === '❤' && user.id === message.author.id;
+   let greenFilter = (reaction, user) => reaction.emoji.name === '💚' && user.id === message.author.id;
+   let purpleFilter = (reaction, user) => reaction.emoji.name === '💜' && user.id === message.author.id;
+   let yellowFilter = (reaction, user) => reaction.emoji.name === '💛' && user.id === message.author.id;
+   let blackFilter = (reaction, user) => reaction.emoji.name === '🖤' && user.id === message.author.id;
+   let blueFilter = (reaction, user) => reaction.emoji.name === '💙' && user.id === message.author.id;
+   let nooneFilter = (reaction, user) => reaction.emoji.name === '❌' && user.id === message.author.id;
+ 
+   let red = msg.createReactionCollector(redFilter, { time: 15000 });
+   let green = msg.createReactionCollector(greenFilter, { time: 15000 });
+   let purple = msg.createReactionCollector(purpleFilter, { time: 15000 });
+   let yellow = msg.createReactionCollector(yellowFilter, { time: 15000 });
+   let black = msg.createReactionCollector(blackFilter, { time: 15000 });
+   let blue = msg.createReactionCollector(blueFilter, { time: 15000 });
+   let noone = msg.createReactionCollector(nooneFilter, { time: 15000 });
+ 
+   red.on("collect", r => {
+       message.member.addRole(message.guild.roles.find("name", "red"));
+       message.member.removeRole(message.guild.roles.find("name", "black"));
+       message.member.removeRole(message.guild.roles.find("name", "yellow"));
+       message.member.removeRole(message.guild.roles.find("name", "purple"));
+       message.member.removeRole(message.guild.roles.find("name", "green"));
+       message.member.removeRole(message.guild.roles.find("name", "blue"));
+       msg.delete();
+       message.channel.send(`**you have been gived the red color__.**`).then(m => m.delete(5000));
+ 
+       })
      
-     
-
-       let activeFilter = (reaction, user) => reaction.emoji.name === '✅' && user.id === message.author.id;
-     
-       let active = msg.createReactionCollector(activeFilter, { time: 15000 });
-     
-                                                        
-                               active.on("collect", r => {
-                                   message.member.addRole(message.guild.roles.find("name", "active"));
-                                   message.member.removeRole(message.guild.roles.find("name", "not active"));
-                                   msg.delete();
-                                   message.channel.send(`**تم تفعيلك استمتع.**`).then(m => m.delete(1000));
-     
-                                   })
-                                   })
-                                   }
-                                   });
-
-
-
-client.on('message', message => {
-   
-      if(message.content === prefix + "hidechannel") {
-      if(!message.channel.guild) return;
-      if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('**You Dont Have Perms :x:**');
-             message.channel.overwritePermissions(message.guild.id, {
-             READ_MESSAGES: false
- })
-              message.channel.send('**Channel Hided Successfully ! :white_check_mark:  **')            
- }
-});
-
-
-client.on('message', message => {
-   
-      if(message.content === prefix + "showchannel") {
-      if(!message.channel.guild) return;
-      if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('**:x:**');
-             message.channel.overwritePermissions(message.guild.id, {
-             READ_MESSAGES: true
- })
-              message.channel.send('**Done  **')            
- }
-});
-
+       green.on("collect", r => {
+           message.member.addRole(message.guild.roles.find("name", "green"));
+           message.member.removeRole(message.guild.roles.find("name", "black"));
+           message.member.removeRole(message.guild.roles.find("name", "yellow"));
+           message.member.removeRole(message.guild.roles.find("name", "purple"));
+           message.member.removeRole(message.guild.roles.find("name", "red"));
+           message.member.removeRole(message.guild.roles.find("name", "blue"));
+           msg.delete();
+           message.channel.send(`**you have been gived the green color__.**`).then(m => m.delete(5000));
+ 
+           })
+         
+           purple.on("collect", r => {
+               message.member.addRole(message.guild.roles.find("name", "purple"));
+               message.member.removeRole(message.guild.roles.find("name", "black"));
+               message.member.removeRole(message.guild.roles.find("name", "yellow"));
+               message.member.removeRole(message.guild.roles.find("name", "green"));
+               message.member.removeRole(message.guild.roles.find("name", "red"));
+               message.member.removeRole(message.guild.roles.find("name", "blue"));
+               msg.delete();
+               message.channel.send(`**you have been gived the purple color.**`).then(m => m.delete(1000));
+ 
+               })
+             
+               yellow.on("collect", r => {
+                   message.member.addRole(message.guild.roles.find("name", "yellow"));
+                   message.member.removeRole(message.guild.roles.find("name", "black"));
+                   message.member.removeRole(message.guild.roles.find("name", "purple"));
+                   message.member.removeRole(message.guild.roles.find("name", "green"));
+                   message.member.removeRole(message.guild.roles.find("name", "red"));
+                   message.member.removeRole(message.guild.roles.find("name", "blue"));
+                   msg.delete();
+                   message.channel.send(`**you have been gived the yellow color__.**`).then(m => m.delete(1000));
+ 
+                   })
+                 
+                   black.on("collect", r => {
+                       message.member.addRole(message.guild.roles.find("name", "black"));
+                       message.member.removeRole(message.guild.roles.find("name", "yellow"));
+                       message.member.removeRole(message.guild.roles.find("name", "purple"));
+                       message.member.removeRole(message.guild.roles.find("name", "green"));
+                       message.member.removeRole(message.guild.roles.find("name", "red"));
+                       message.member.removeRole(message.guild.roles.find("name", "blue"));
+                       msg.delete();
+                       message.channel.send(`**you have been gived the black color__.**`).then(m => m.delete(1000));
+ 
+                       })
+                       noone.on("collect", r => {
+                           message.member.removeRole(message.guild.roles.find("name", "yellow"));
+                           message.member.removeRole(message.guild.roles.find("name", "purple"));
+                           message.member.removeRole(message.guild.roles.find("name", "green"));
+                           message.member.removeRole(message.guild.roles.find("name", "red"));
+                           message.member.removeRole(message.guild.roles.find("name", "blue"));
+                           message.member.removeRole(message.guild.roles.find("name", "black"));
+                           msg.delete();
+                           message.channel.send(`**Cleared colors removed from you.**`).then(m => m.delete(1000));
+ 
+                           })                                                          
+                           blue.on("collect", r => {
+                               message.member.addRole(message.guild.roles.find("name", "blue"));
+                               message.member.removeRole(message.guild.roles.find("name", "yellow"));
+                               message.member.removeRole(message.guild.roles.find("name", "purple"));
+                               message.member.removeRole(message.guild.roles.find("name", "green"));
+                               message.member.removeRole(message.guild.roles.find("name", "red"));
+                               message.member.removeRole(message.guild.roles.find("name", "black"));
+                               msg.delete();
+                               message.channel.send(`**you have been gived the blue color__.**`).then(m => m.delete(1000));
+ 
+ 
+                               })
+                               })
+                               }
+                               });
 
 
 client.on('message', msg => {
