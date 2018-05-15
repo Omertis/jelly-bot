@@ -489,7 +489,8 @@ function timeCon(time) {
                         }
                     })
 //--------------------------------------------------------------------------
- client.on('message', message => {
+ client.on('message'
+           , message => {bnfdggfdgsdgdfgdfgdfgrgarwefgq
     if(message.content.startsWith(prefix +"info")) {
         message.channel.send({
             embed: new Discord.RichEmbed()
@@ -805,7 +806,6 @@ if(message.content === adminprefix + "restart") {
   
   
   
-  
   const arraySort = require('array-sort'),
       table = require('table');
 
@@ -980,7 +980,6 @@ client.on('ready', () => {
     console.log(`✨ Channels: ${client.channels.size}`)
     console.log('-------------------------')
   })
-
 
 
 
